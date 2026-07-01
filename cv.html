@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV – Muhamad Yazid Zinky Arisona | Informatics Engineer</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --accent: #f97316;
+            --dark:   #0a0a0a;
+            --text:   #1a1a1a;
+            --muted:  #555;
+            --border: #e0e0e0;
+            --bg:     #ffffff;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.55;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 48px 48px 64px;
+        }
+
+        @media print {
+            body { padding: 20px 32px 40px; font-size: 10.5pt; }
+            .no-print { display: none !important; }
+            a { color: inherit !important; text-decoration: none !important; }
+            section { page-break-inside: avoid; }
+        }
+
+        .no-print {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            display: flex;
+            gap: 10px;
+        }
+        .no-print button {
+            padding: 10px 20px;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            font-family: sans-serif;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 0.02em;
+        }
+        .no-print button:hover { background: #ea6a0a; }
+        .no-print button.secondary {
+            background: transparent;
+            border: 1.5px solid #ccc;
+            color: #444;
+        }
+        .no-print button.secondary:hover { border-color: #999; }
+
+        header {
+            border-bottom: 2.5px solid var(--accent);
+            padding-bottom: 20px;
+            margin-bottom: 28px;
+        }
+        header h1 {
+            font-size: 26pt;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--dark);
+            margin-bottom: 4px;
+            font-family: 'Arial', sans-serif;
+        }
+        .subtitle {
+            font-size: 12pt;
+            color: var(--accent);
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+        .contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px 20px;
+            font-size: 9.5pt;
+            color: var(--muted);
+            font-family: 'Arial', sans-serif;
+            margin-top: 8px;
+        }
+        .contact-row a { color: var(--muted); text-decoration: none; }
+        .contact-row a:hover { color: var(--accent); }
+
+        section { margin-bottom: 26px; }
+        section h2 {
+            font-size: 10pt;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--accent);
+            font-family: 'Arial', sans-serif;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 4px;
+            margin-bottom: 14px;
+        }
+
+        .about-text {
+            font-size: 10.5pt;
+            color: #333;
+            line-height: 1.65;
+            max-width: 680px;
+        }
+
+        .entry { margin-bottom: 18px; }
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .entry-title {
+            font-size: 11.5pt;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            color: var(--dark);
+        }
+        .entry-org {
+            font-size: 10.5pt;
+            font-weight: 600;
+            color: var(--accent);
+            font-family: 'Arial', sans-serif;
+        }
+        .entry-date {
+            font-size: 9.5pt;
+            color: var(--muted);
+            font-family: 'Arial', sans-serif;
+            white-space: nowrap;
+            flex-shrink: 0;
+        }
+        .entry-location {
+            font-size: 9.5pt;
+            color: var(--muted);
+            font-family: 'Arial', sans-serif;
+            margin-bottom: 6px;
+        }
+        .entry ul { padding-left: 18px; margin-top: 6px; }
+        .entry ul li {
+            font-size: 10.5pt;
+            color: #333;
+            margin-bottom: 3px;
+            line-height: 1.55;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px 32px;
+        }
+        .skill-group {
+            display: block;
+        }
+        .skill-group-label {
+            font-size: 9.5pt;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--dark);
+            margin-bottom: 3px;
+        }
+        .skill-list {
+            font-size: 10pt;
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .project-entry { margin-bottom: 14px; }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+        .project-title {
+            font-size: 11pt;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            color: var(--dark);
+        }
+        .project-tag {
+            font-size: 9pt;
+            color: var(--accent);
+            font-family: 'Arial', sans-serif;
+            font-weight: 600;
+        }
+        .project-links {
+            font-size: 9pt;
+            color: var(--muted);
+            font-family: 'Arial', sans-serif;
+            margin-top: 1px;
+        }
+        .project-links a { color: var(--muted); text-decoration: none; }
+        .project-desc {
+            font-size: 10pt;
+            color: #444;
+            margin-top: 3px;
+            line-height: 1.55;
+        }
+        .tech-tags {
+            margin-top: 4px;
+            font-size: 9pt;
+            color: var(--muted);
+            font-family: 'Courier New', monospace;
+        }
+
+        .cert-list { columns: 2; gap: 24px; }
+        .cert-item {
+            font-size: 10pt;
+            color: #333;
+            margin-bottom: 5px;
+            break-inside: avoid;
+        }
+        .cert-item span {
+            font-size: 9pt;
+            color: var(--muted);
+        }
+
+        .stats-strip {
+            display: flex;
+            gap: 32px;
+            background: #fafafa;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+        }
+        .stat-item { text-align: center; }
+        .stat-num {
+            font-size: 16pt;
+            font-weight: 700;
+            font-family: 'Arial', sans-serif;
+            color: var(--accent);
+            display: block;
+        }
+        .stat-label {
+            font-size: 8.5pt;
+            color: var(--muted);
+            font-family: 'Arial', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Muhamad Yazid Zinky Arisona</h1>
+        <div class="subtitle">Informatics Engineer &nbsp;·&nbsp; Fullstack Developer &nbsp;·&nbsp; AI/ML Engineer</div>
+        <div class="contact-row">
+            <span>📧 <a href="mailto:yazidzinky98@gmail.com">yazidzinky98@gmail.com</a></span>
+            <span>🔗 <a href="https://github.com/yazidzky" target="_blank">github.com/yazidzky</a></span>
+            <span>💼 <a href="https://www.linkedin.com/in/muhamadyazidzinkyarisona" target="_blank">LinkedIn</a></span>
+            <span>📷 <a href="https://www.instagram.com/cyiily_" target="_blank">@cyiily_</a></span>
+            <span>🌐 <a href="https://portfolio-yazidzky.vercel.app" target="_blank">Portfolio</a></span>
+            <span>📍 Bandung, West Java, Indonesia</span>
+            <span>✅ Open to Work</span>
+        </div>
+    </header>
+
+    <section>
+        <h2>Professional Summary</h2>
+        <p class="about-text">
+            Informatics Engineering student with hands-on experience in fullstack web development, machine learning, mobile application development, and embedded systems. Demonstrated ability to build end-to-end digital products — from RESTful APIs and PWAs to deep learning pipelines achieving 99%+ accuracy. Proven team leadership as Mechanical Division Leader in a university robotics team, combined with competition experience in web design. Passionate about applying AI and robust system architecture to create accessible, high-performance solutions.
+        </p>
+    </section>
+
+    <div class="stats-strip no-print">
+        <div class="stat-item"><span class="stat-num">13+</span><span class="stat-label">Projects</span></div>
+        <div class="stat-item"><span class="stat-num">18+</span><span class="stat-label">Certificates</span></div>
+        <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Tech Stacks</span></div>
+        <div class="stat-item"><span class="stat-num">99%</span><span class="stat-label">Best Accuracy</span></div>
+    </div>
+
+    <section>
+        <h2>Experience</h2>
+
+        <div class="entry">
+            <div class="entry-header">
+                <div>
+                    <div class="entry-title">Leader of Mechanical Robotics Division</div>
+                    <div class="entry-org">Robotika UIN Bandung</div>
+                </div>
+                <div class="entry-date">March 2025 – December 2025 (10 months)</div>
+            </div>
+            <div class="entry-location">Bandung, West Java, Indonesia</div>
+            <ul>
+                <li>Led and mentored team members to enhance skills in mechanical design, manufacturing, and system integration.</li>
+                <li>Collaborated cross-divisionally to align mechanical subsystems with electronics and robot programming modules.</li>
+                <li>Designed and iterated robotic mechanical systems, ensuring efficiency and reliability of each developed component.</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <div>
+                    <div class="entry-title">Member of Robotics Team</div>
+                    <div class="entry-org">Robotika UIN Bandung</div>
+                </div>
+                <div class="entry-date">October 2024 – December 2024 (3 months)</div>
+            </div>
+            <div class="entry-location">Bandung, West Java, Indonesia</div>
+            <ul>
+                <li>Participated in sumo robot development project as core team member.</li>
+                <li>Developed embedded system programming skills (C/C++, microcontroller integration).</li>
+                <li>Collaborated in a team to design and optimize the sumo robot's mechanical and electronic systems.</li>
+            </ul>
+        </div>
+
+        <div class="entry">
+            <div class="entry-header">
+                <div>
+                    <div class="entry-title">Finalist – Web Design Competition (HIMIKA CUP PART-V)</div>
+                    <div class="entry-org">Universitas Dehasen Bengkulu (UNIVED)</div>
+                </div>
+                <div class="entry-date">November 2024</div>
+            </div>
+            <div class="entry-location">Bandung, West Java, Indonesia</div>
+            <ul>
+                <li>Developed and implemented interactive web pages using HTML, CSS, JavaScript, and Bootstrap.</li>
+                <li>Optimized website performance for improved loading speed and user experience.</li>
+                <li>Integrated JavaScript functionalities to enhance interactivity across the interface.</li>
+                <li>Collaborated with team members to translate design concepts into working implementations.</li>
+                <li>Managed time effectively to deliver a complete product under competition pressure.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2>Education</h2>
+        <div class="entry">
+            <div class="entry-header">
+                <div>
+                    <div class="entry-title">Bachelor of Informatics Engineering (S.Kom)</div>
+                    <div class="entry-org">UIN Sunan Gunung Djati Bandung</div>
+                </div>
+                <div class="entry-date">2022 – Present</div>
+            </div>
+            <div class="entry-location">Bandung, West Java, Indonesia</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Technical Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <div class="skill-group-label">Frontend</div>
+                <div class="skill-list">React, Next.js, TypeScript, Tailwind CSS, JavaScript, HTML5, CSS3, Framer Motion</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-label">Backend</div>
+                <div class="skill-list">Node.js, Express.js, REST API, MongoDB, PostgreSQL, Firebase, JWT, Socket.IO</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-label">AI / Machine Learning</div>
+                <div class="skill-list">Python, TensorFlow, Sentence-BERT, Scikit-learn, MediaPipe, OpenCV, TF-IDF, LSTM, FastAPI, NLP, Pandas, NumPy, Jupyter</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-label">Mobile &amp; Other</div>
+                <div class="skill-list">Flutter, Dart, Firebase, Hive, Android, PWA, AES-256-GCM, LSB Steganography, Git, Vercel</div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Selected Projects</h2>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">PELET App — AI CV-to-Competency Matching</div>
+                <div class="project-tag">Machine Learning · NLP · FastAPI</div>
+            </div>
+            <div class="project-links">
+                <a href="https://pelet-app.vercel.app">pelet-app.vercel.app</a> &nbsp;|&nbsp;
+                <a href="https://github.com/Pelet-app/Model_AI">github.com/Pelet-app/Model_AI</a>
+            </div>
+            <div class="project-desc">AI semantic matching of CVs to SKKNI (Indonesian National Work Competency Standards) using Sentence-BERT + TensorFlow. Achieved 99.06% accuracy on 1,175 samples with a FastAPI backend.</div>
+            <div class="tech-tags">Python · Sentence-BERT · TensorFlow · FastAPI · NLP</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">TeleCode Medical — Secure Medical PWA</div>
+                <div class="project-tag">Fullstack · PWA · Cybersecurity</div>
+            </div>
+            <div class="project-links">
+                <a href="https://tele-code-medical.vercel.app">tele-code-medical.vercel.app</a> &nbsp;|&nbsp;
+                <a href="https://github.com/yazidzky/TeleCodeMedical">GitHub</a>
+            </div>
+            <div class="project-desc">100% client-side PWA for secure medical data transmission using LSB steganography, AES-256-GCM encryption, G.711 audio codec, and rule-based AI clinical analysis covering 8 diseases.</div>
+            <div class="tech-tags">React 19 · Vite · AES-256-GCM · LSB Steganography · PWA</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">Edurate Platform — Higher Education Review System</div>
+                <div class="project-tag">Fullstack · REST API · Node.js</div>
+            </div>
+            <div class="project-links">
+                <a href="https://edu-rate-main-16in.vercel.app">edu-rate-main-16in.vercel.app</a> &nbsp;|&nbsp;
+                <a href="https://github.com/yazidzky/EduRate-main">GitHub</a>
+            </div>
+            <div class="project-desc">Higher education rating &amp; review platform — students evaluate lecturers and courses. Multi-role auth (student/lecturer/admin), full CRUD reviews, and analytics endpoints.</div>
+            <div class="tech-tags">Node.js · Express.js · MongoDB · JWT</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">SipSip Water Tracker — Mobile App</div>
+                <div class="project-tag">Mobile · Flutter · Firebase</div>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/yazidzky/WaterTracker-Sipsip-">github.com/yazidzky/WaterTracker-Sipsip-</a>
+            </div>
+            <div class="project-desc">Cross-platform mobile app for daily water intake tracking with smart reminders (body weight, activity, weather), gamification, hydration statistics, and offline mode via Hive.</div>
+            <div class="tech-tags">Flutter · Firebase · Hive · Provider · Dart</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">Ocean Blue — Fullstack PWA with Real-Time Chat</div>
+                <div class="project-tag">Fullstack · Socket.IO · MongoDB</div>
+            </div>
+            <div class="project-links">
+                <a href="https://blue-ocean-main-lrwe.vercel.app">blue-ocean-main-lrwe.vercel.app</a> &nbsp;|&nbsp;
+                <a href="https://github.com/yazidzky/BlueOcean-main">GitHub</a>
+            </div>
+            <div class="project-desc">Task management PWA + social network with real-time chat, offline mode, push notifications, and background sync via Socket.IO.</div>
+            <div class="tech-tags">React 19 · TypeScript · Socket.IO · MongoDB · Node.js</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">MBG Risk Prediction — NLP Multi-Label Classification</div>
+                <div class="project-tag">Machine Learning · NLP · Scikit-learn</div>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/yazidzky/Model-Prediksi-MBG">github.com/yazidzky/Model-Prediksi-MBG</a>
+            </div>
+            <div class="project-desc">Multi-label risk classification of Indonesia's Free Nutritious Meals program from 814 news articles using TF-IDF + SVM/Logistic Regression. F1-Macro ~0.83, identifying NTB as the highest-risk province (43.7%).</div>
+            <div class="tech-tags">Python · NLP · TF-IDF · SVM · Scikit-learn</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">Sign Language Recognition — Real-Time Computer Vision</div>
+                <div class="project-tag">Machine Learning · Computer Vision · Python</div>
+            </div>
+            <div class="project-links">
+                <a href="https://github.com/yazidzky/Program-bahasa-Isyarat-berbasis-python">GitHub</a>
+            </div>
+            <div class="project-desc">Real-time hand gesture recognition system translating sign language into text via computer vision and Finite State Automata logic. Detects 21 hand landmarks per frame via webcam.</div>
+            <div class="tech-tags">Python · MediaPipe · OpenCV · FSA</div>
+        </div>
+
+        <div class="project-entry">
+            <div class="project-header">
+                <div class="project-title">Stuker App — Campus Marketplace Backend</div>
+                <div class="project-tag">Backend · AI · Next.js</div>
+            </div>
+            <div class="project-links">
+                <a href="https://stuker-app-4sh4.vercel.app">stuker-app-4sh4.vercel.app</a> &nbsp;|&nbsp;
+                <a href="https://github.com/yazidzky/stukerApp">GitHub</a>
+            </div>
+            <div class="project-desc">Campus marketplace connecting student service providers (design, coding, tutoring) with buyers. Includes escrow payment, order tracking, reputation system, and Gemini AI integration.</div>
+            <div class="tech-tags">Next.js · Node.js · MongoDB · Socket.IO · Gemini AI</div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Certifications</h2>
+        <div class="cert-list">
+            <div class="cert-item">Advanced Deep Learning Projects <span>— Dicoding</span></div>
+            <div class="cert-item">Fundamental Deep Learning <span>— Dicoding</span></div>
+            <div class="cert-item">Machine Learning for Beginners <span>— Dicoding</span></div>
+            <div class="cert-item">Basic AI Concepts <span>— Dicoding</span></div>
+            <div class="cert-item">Python Programming <span>— Dicoding</span></div>
+            <div class="cert-item">Cloud &amp; Gen AI at AWS <span>— Dicoding</span></div>
+            <div class="cert-item">Introduction to AI <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">Introduction to Generative AI <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">AI Ethics <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">GenAI for Software Development <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">Code Generation &amp; Optimization (IBM Granite) <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">IBM Granite Models for Software Development <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">Career Management Essentials <span>— IBM SkillsBuild</span></div>
+            <div class="cert-item">IBM Design 2025 — Code Gen &amp; Optimization <span>— IBM</span></div>
+            <div class="cert-item">Database Design <span>— Oracle Academy</span></div>
+            <div class="cert-item">Database SQL Programming <span>— Oracle Academy</span></div>
+            <div class="cert-item">Website Deployment Revolution <span>— Codepolitan</span></div>
+            <div class="cert-item">NanoConnect: React + Supabase + Serverless <span>— Codepolitan</span></div>
+            <div class="cert-item">Proficient Dev Program × Tencent EdgeOne <span>— Codepolitan</span></div>
+        </div>
+    </section>
+
+    <section>
+        <h2>Languages</h2>
+        <div class="skills-grid">
+            <div class="skill-group">
+                <div class="skill-group-label">Indonesian</div>
+                <div class="skill-list">Native</div>
+            </div>
+            <div class="skill-group">
+                <div class="skill-group-label">English</div>
+                <div class="skill-list">Professional Working Proficiency</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="no-print">
+        <button class="secondary" onclick="window.history.back()">← Back</button>
+        <button onclick="window.print()">⬇ Save as PDF</button>
+    </div>
+
+</body>
+</html>

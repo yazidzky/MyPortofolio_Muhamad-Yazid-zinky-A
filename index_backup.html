@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Muh Yazid Zinky Arisona</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#0a0a0a',
+                        surface: '#171717',
+                        accent: '#f97316', // orange-500
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #ededed;
+            overflow-x: hidden;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        
+        .glass-panel {
+            background: rgba(23, 23, 23, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 2rem;
+            animation: marquee 35s linear infinite;
+        }
+        
+        @keyframes marquee {
+            from { transform: translateX(0); }
+            to { transform: translateX(calc(-50% - 1rem)); }
+        }
+
+        /* 3D Tilt container */
+        .tilt-container {
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+
+        /* Curtain Effects */
+        .curtain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        .curtain-panel {
+            position: absolute;
+            background: #0a0a0a;
+        }
+        .curtain-iris {
+            position: absolute;
+            inset: 0;
+            background: #0a0a0a;
+            clip-path: circle(0% at 50% 50%);
+        }
+        .curtain-wipe {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #171717 50%, #0a0a0a 100%);
+            transform: translateX(-110%);
+        }
+        .curtain-wipe::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -2px; bottom: 0;
+            width: 4px;
+            background: #f97316;
+            box-shadow: 0 0 20px #f97316, 0 0 40px rgba(249,115,22,0.4);
+        }
+        .blinds-slat {
+            position: absolute;
+            left: 0; right: 0;
+            background: #0a0a0a;
+            transform: scaleY(0);
+            transform-origin: top;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-accent selection:text-white">
+    <!-- Cursor Glow -->
+    <div id="cursor-glow" class="fixed w-[400px] h-[400px] bg-accent/10 rounded-full blur-[100px] pointer-events-none z-0 transform -translate-x-1/2 -translate-y-1/2"></div>
+
+    <!-- Curtain Overlays -->
+    <div id="curtain-iris" class="curtain-overlay" style="pointer-events:all">
+        <div class="curtain-iris" id="iris-circle" style="clip-path: circle(150% at 50% 50%)"></div>
+    </div>
+    <div id="curtain-wipe" class="curtain-overlay" style="display:none">
+        <div class="curtain-wipe" id="wipe-panel"></div>
+    </div>
+    <div id="curtain-blinds" class="curtain-overlay" style="display:none"></div>
+
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-panel border-b-0 h-16 flex items-center transition-transform duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 w-full flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2 group">
+                <span class="font-mono text-sm tracking-widest uppercase text-accent font-bold">YZD.</span>
+            </a>
+            <div class="hidden md:flex gap-8 text-sm font-medium text-gray-400">
+                <a href="#about" class="hover:text-white transition-colors">About</a>
+                <a href="#skills" class="hover:text-white transition-colors">Skills</a>
+                <a href="#projects" class="hover:text-white transition-colors">Work</a>
+                <a href="#certifications" class="hover:text-white transition-colors">Certifications</a>
+                <a href="#contact" class="hover:text-accent transition-colors">Contact</a>
+            </div>
+            <button class="md:hidden text-gray-400 hover:text-white">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[100dvh] flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-6 w-full grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 z-10 flex flex-col items-start hero-text relative">
+                <!-- Readymag-style background typography -->
+                <div class="absolute -top-20 -left-10 opacity-10 pointer-events-none select-none overflow-visible whitespace-nowrap z-[-1]">
+                    <h2 class="text-[12vw] md:text-[8vw] font-bold tracking-tighter text-transparent leading-none" style="-webkit-text-stroke: 1px rgba(255,255,255,0.8);">SOFTWARE</h2>
+                    <h2 class="text-[12vw] md:text-[8vw] font-bold tracking-tighter text-transparent leading-none -mt-4 md:-mt-8" style="-webkit-text-stroke: 1px rgba(249,115,22,0.8);">ENGINEER</h2>
+                </div>
+
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-accent mb-6 block">Creative Developer</span>
+                <h1 class="text-5xl md:text-6xl lg:text-7xl tracking-tighter leading-[1.1] font-medium mb-6">
+                    Crafting interactive <br />
+                    <span class="text-gray-500">web experiences.</span>
+                </h1>
+                <p class="text-gray-400 text-lg max-w-[45ch] leading-relaxed mb-8">
+                    I build accessible, responsive, and performance-driven applications leveraging modern web technologies, fullstack architecture, and AI integration.
+                </p>
+                <div class="flex gap-4 flex-wrap">
+                    <a href="#projects" class="magnetic-btn bg-white text-black px-6 py-3 text-sm font-medium hover:-translate-y-[2px] transition-transform active:translate-y-0 rounded-none inline-block">
+                        View Selected Work
+                    </a>
+                    <a href="#contact" class="magnetic-btn px-6 py-3 text-sm font-medium text-white border border-white/20 hover:bg-white/5 hover:-translate-y-[2px] transition-all active:translate-y-0 rounded-none inline-block">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+            <div class="md:col-span-5 relative flex justify-center md:justify-end items-center z-20 mt-16 md:mt-0 perspective-[1000px]">
+                <!-- Outer Hanger (Swings from top) -->
+                <div id="id-card-hanger" class="relative flex flex-col items-center origin-top w-[180px] md:w-64 will-change-transform z-20">
+                    <!-- Lanyard Hook -->
+                    <div class="hidden md:block absolute -top-[500px] w-1.5 h-[500px] bg-accent/90 shadow-[0_0_20px_rgba(249,115,22,0.6)]"></div>
+                    <!-- Metal Clip -->
+                    <div class="hidden md:flex w-5 h-7 md:w-6 md:h-8 bg-gradient-to-b from-gray-300 to-gray-500 rounded-sm -mt-2 border border-white/20 shadow-xl z-10 items-center justify-center">
+                        <div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-gray-800 rounded-full"></div>
+                    </div>
+                    
+                    <!-- Inner Card Body (Tilts from center) -->
+                    <div id="id-card" class="glass-panel w-full h-[280px] md:h-[380px] rounded-xl md:rounded-2xl p-4 md:p-5 flex flex-col mt-[-4px] relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.6)] border-t border-white/20 bg-gradient-to-b from-surface/90 to-dark/90 backdrop-blur-xl group/card cursor-grab active:cursor-grabbing transform-style-3d will-change-transform">
+                        <!-- Holographic reflection -->
+                        <div class="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/10 to-white/0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-700 pointer-events-none transform -translate-x-full group-hover/card:translate-x-full ease-out duration-1000"></div>
+                        
+                        <!-- Header -->
+                        <div class="flex justify-between items-start mb-3 md:mb-4 border-b border-white/10 pb-2 md:pb-3">
+                            <div>
+                                <span class="font-mono text-[8px] md:text-[10px] text-accent tracking-widest block font-bold">DEV ACCESS</span>
+                                <span class="font-mono text-[7px] md:text-[9px] text-gray-500">ID: YZD-2026</span>
+                            </div>
+                            <i data-lucide="nfc" class="w-4 h-4 md:w-5 md:h-5 text-gray-400"></i>
+                        </div>
+                        
+                        <!-- Photo -->
+                        <div class="w-full aspect-square rounded-lg md:rounded-xl overflow-hidden bg-dark mb-3 md:mb-4 border border-white/10 p-1">
+                            <div class="w-full h-full rounded-md md:rounded-lg overflow-hidden relative">
+                                <img src="src/assets/image/profil.jpg" class="w-full h-full object-cover grayscale group-hover/card:grayscale-0 transition-all duration-700 scale-100 group-hover/card:scale-105" onerror="this.src='https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=1600&auto=format&fit=crop'">
+                                <div class="absolute inset-0 border border-white/10 rounded-lg pointer-events-none"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Details -->
+                        <div class="mt-auto relative z-10">
+                            <h4 class="font-sans font-bold text-base md:text-xl uppercase tracking-wide mb-1 text-white">M. Yazid Z. A.</h4>
+                            <p class="text-[9px] md:text-[11px] text-accent font-mono mb-2 md:mb-4 bg-accent/10 inline-block px-2 py-1 rounded">Software Engineer</p>
+                            
+                            <!-- Barcode -->
+                            <div class="w-full h-6 md:h-8 bg-white/5 rounded flex items-center justify-between px-3">
+                                <div class="h-3 md:h-4 w-full bg-[repeating-linear-gradient(90deg,#fff,#fff_2px,transparent_2px,transparent_5px)] opacity-50"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Ambient Glow behind card -->
+                <div class="absolute -bottom-10 right-0 md:-right-10 w-32 h-32 md:w-40 md:h-40 bg-accent/20 blur-[60px] rounded-full pointer-events-none z-0"></div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 bg-surface/50 border-y border-white/5">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-12 gap-12">
+            <div class="md:col-span-4">
+                <h2 class="text-2xl font-medium tracking-tight">About Me</h2>
+            </div>
+            <div class="md:col-span-8 text-gray-300 text-lg leading-relaxed max-w-2xl font-light space-y-6">
+                <p class="gsap-fade-up">
+                    I specialize in fullstack development, machine learning, and clean frontend architectures. I enjoy translating complex requirements into highly interactive, user-centered digital products.
+                </p>
+                <p class="gsap-fade-up text-gray-500">
+                    Driven by a curiosity for data and design, I actively explore how artificial intelligence and robust system design can create smarter and more accessible web solutions.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Bento Grid -->
+    <section id="skills" class="py-24 md:py-32">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-medium tracking-tight mb-16">Technical Capabilities</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[280px]">
+                <!-- Cell 1: Frontend (Large) -->
+                <div class="md:col-span-2 glass-panel p-8 flex flex-col justify-between group hover:border-white/10 transition-colors">
+                    <div class="flex items-start justify-between">
+                        <i data-lucide="layout" class="w-6 h-6 text-accent mb-4 opacity-50 group-hover:opacity-100 transition-opacity"></i>
+                        <span class="font-mono text-xs text-gray-500">90%+ Proficiency</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium mb-4">Frontend Engineering</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">React</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">NextJS</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Tailwind</span>
+                            <span class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs">Framer Motion</span>
+                        </div>
+                        <p class="text-gray-400 text-sm max-w-sm">Crafting responsive interfaces and complex animations using modern frameworks.</p>
+                    </div>
+                </div>
+                
+                <!-- Cell 2: Backend -->
+                <div class="glass-panel p-8 flex flex-col justify-between group hover:border-white/10 transition-colors">
+                    <i data-lucide="server" class="w-6 h-6 text-gray-500 mb-4 group-hover:text-white transition-colors"></i>
+                    <div>
+                        <h3 class="text-xl font-medium mb-4">Backend</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">NodeJS</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">Express</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">Firebase</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">PostgreSQL</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Building scalable APIs and server-side logic.</p>
+                    </div>
+                </div>
+
+                <!-- Cell 3: Data & ML -->
+                <div class="glass-panel p-8 flex flex-col justify-between group hover:border-white/10 transition-colors">
+                    <i data-lucide="brain-circuit" class="w-6 h-6 text-gray-500 mb-4 group-hover:text-white transition-colors"></i>
+                    <div>
+                        <h3 class="text-xl font-medium mb-4">Machine Learning</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">Python</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">TensorFlow</span>
+                            <span class="px-2 py-1 bg-white/5 rounded text-xs">Pandas</span>
+                        </div>
+                        <p class="text-gray-400 text-sm">Data processing and AI model integration.</p>
+                    </div>
+                </div>
+
+                <!-- Cell 4: Mobile & App (Wide) -->
+                <div class="md:col-span-2 glass-panel p-8 flex flex-col justify-between bg-gradient-to-br from-surface to-dark group hover:border-white/10 transition-colors">
+                    <div class="flex justify-between items-start">
+                        <i data-lucide="smartphone" class="w-6 h-6 text-gray-500 mb-4 group-hover:text-white transition-colors"></i>
+                        <span class="font-mono text-xs text-gray-600 uppercase tracking-widest">Mobile</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-medium mb-4">App Development</h3>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 border border-white/10 rounded-full text-xs">Flutter</span>
+                            <span class="px-3 py-1 border border-white/10 rounded-full text-xs">Dart</span>
+                            <span class="px-3 py-1 border border-white/10 rounded-full text-xs">Android (Java)</span>
+                            <span class="px-3 py-1 border border-white/10 rounded-full text-xs">PWA</span>
+                        </div>
+                        <p class="text-gray-400 text-sm max-w-md">Developing cross-platform mobile applications with native-like performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Projects -->
+    <section id="projects" class="py-24 md:py-32 bg-surface/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl font-medium tracking-tight mb-20">Selected Work</h2>
+
+            <div class="space-y-32">
+                <!-- Project 1: Edurate -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center project-row">
+                    <div class="md:col-span-5 md:col-start-1 flex flex-col order-2 md:order-1">
+                        <span class="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4 block">01 / Fullstack</span>
+                        <h3 class="text-3xl font-medium tracking-tight mb-4">Edurate Platform</h3>
+                        <p class="text-gray-400 leading-relaxed mb-8 max-w-md">
+                            Comprehensive educational platform integrating both frontend and backend technologies. Designed to streamline workflows and improve communication.
+                        </p>
+                        <div class="flex gap-3 mb-8 flex-wrap">
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">React</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Node.js</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Education</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://edu-rate-main-16in.vercel.app/" target="_blank" class="text-sm font-medium hover:text-accent transition-colors flex items-center gap-2">
+                                Live Demo <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                            <a href="https://github.com/yazidzky/EduRate-main" target="_blank" class="text-sm font-medium text-gray-500 hover:text-white transition-colors flex items-center gap-2">
+                                Code <i data-lucide="github" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 order-1 md:order-2">
+                        <div class="aspect-[16/9] bg-surface border border-white/5 overflow-hidden group relative">
+                            <img src="src/assets/image/websiteEdurate.png" alt="Edurate" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80'">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: SipSip -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center project-row">
+                    <div class="md:col-span-7">
+                        <div class="aspect-[16/9] bg-surface border border-white/5 overflow-hidden group relative">
+                            <img src="src/assets/image/fullstackWatertrackersipsip.png" alt="Water Tracker" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1548811579-017fa2aca58d?auto=format&fit=crop&q=80'">
+                        </div>
+                    </div>
+                    <div class="md:col-span-4 md:col-start-9 flex flex-col">
+                        <span class="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4 block">02 / Fullstack Mobile</span>
+                        <h3 class="text-3xl font-medium tracking-tight mb-4">SipSip Water Tracker</h3>
+                        <p class="text-gray-400 leading-relaxed mb-8 max-w-md">
+                            A smart water intake tracking application to help users stay hydrated throughout the day. Features interactive dashboards and progress visualization.
+                        </p>
+                        <div class="flex gap-3 mb-8 flex-wrap">
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Flutter</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Firebase</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Mobile App</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://play.google.com/store/apps/details?id=com.sipsip.watertracker" target="_blank" class="text-sm font-medium hover:text-accent transition-colors flex items-center gap-2">
+                                App Store <i data-lucide="external-link" class="w-4 h-4"></i>
+                            </a>
+                            <a href="https://github.com/yazidzky/WaterTracker-Sipsip-" target="_blank" class="text-sm font-medium text-gray-500 hover:text-white transition-colors flex items-center gap-2">
+                                Code <i data-lucide="github" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Sign Language ML -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-12 items-center project-row">
+                    <div class="md:col-span-5 md:col-start-1 flex flex-col order-2 md:order-1">
+                        <span class="font-mono text-xs text-gray-500 uppercase tracking-widest mb-4 block">03 / Machine Learning</span>
+                        <h3 class="text-3xl font-medium tracking-tight mb-4">Sign Language ML</h3>
+                        <p class="text-gray-400 leading-relaxed mb-8 max-w-md">
+                            A machine learning model designed to detect and interpret sign language gestures using advanced computer vision algorithms in real-time.
+                        </p>
+                        <div class="flex gap-3 mb-8 flex-wrap">
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Python</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">TensorFlow</span>
+                            <span class="text-xs border border-white/10 px-3 py-1 text-gray-400">Computer Vision</span>
+                        </div>
+                        <div class="flex gap-4">
+                            <a href="https://github.com/yazidzky/Program-bahasa-Isyarat-berbasis-python" target="_blank" class="text-sm font-medium hover:text-accent transition-colors flex items-center gap-2">
+                                View Repository <i data-lucide="github" class="w-4 h-4"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="md:col-span-7 order-1 md:order-2">
+                        <div class="aspect-[16/9] bg-surface border border-white/5 overflow-hidden group">
+                            <img src="src/assets/image/MechineLearningBahasaIsyarat.png" alt="Machine Learning" class="w-full h-full object-cover opacity-80 group-hover:scale-105 group-hover:opacity-100 transition-all duration-700" onerror="this.src='https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?auto=format&fit=crop&q=80'">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <!-- Additional grid for other works -->
+            <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-6 project-row">
+                <div class="group border border-white/5 hover:border-white/20 transition-colors flex flex-col relative overflow-hidden">
+                    <div class="aspect-video bg-surface overflow-hidden relative">
+                        <img src="src/assets/image/websiteIndonesiaEmas.png" alt="Indonesia Emas" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="p-6 glass-panel border-0 border-t border-white/5">
+                        <h4 class="font-medium text-lg mb-2">Indonesia's Golden Age</h4>
+                        <p class="text-xs text-gray-400 mb-4">Frontend interface with modern design.</p>
+                        <div class="flex gap-3">
+                            <a href="https://webdesainindonesia-emas2045.vercel.app/" target="_blank" class="text-xs hover:text-accent">Demo</a>
+                            <a href="https://github.com/yazidzky/webdesainindonesiaEmas2045" target="_blank" class="text-xs text-gray-500 hover:text-white">Github</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group border border-white/5 hover:border-white/20 transition-colors flex flex-col relative overflow-hidden">
+                    <div class="aspect-video bg-surface overflow-hidden relative">
+                        <img src="src/assets/image/websiteOceanBlue.png" alt="Ocean Blue" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="p-6 glass-panel border-0 border-t border-white/5">
+                        <h4 class="font-medium text-lg mb-2">Ocean Blue</h4>
+                        <p class="text-xs text-gray-400 mb-4">Interactive MERN fullstack application.</p>
+                        <div class="flex gap-3">
+                            <a href="https://blue-ocean-main-lrwe.vercel.app/" target="_blank" class="text-xs hover:text-accent">Demo</a>
+                            <a href="https://github.com/yazidzky/BlueOcean-main" target="_blank" class="text-xs text-gray-500 hover:text-white">Github</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group border border-white/5 hover:border-white/20 transition-colors flex flex-col relative overflow-hidden">
+                    <div class="aspect-video bg-surface overflow-hidden relative">
+                        <img src="src/assets/image/websiteStuker.png" alt="Stuker" class="w-full h-full object-cover opacity-70 group-hover:scale-105 group-hover:opacity-100 transition-all duration-500">
+                    </div>
+                    <div class="p-6 glass-panel border-0 border-t border-white/5">
+                        <h4 class="font-medium text-lg mb-2">Stuker Backend</h4>
+                        <p class="text-xs text-gray-400 mb-4">Robust backend data handling API.</p>
+                        <div class="flex gap-3">
+                            <a href="https://stuker-app-4sh4.vercel.app/" target="_blank" class="text-xs hover:text-accent">Demo</a>
+                            <a href="https://github.com/yazidzky/stukerApp" target="_blank" class="text-xs text-gray-500 hover:text-white">Github</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Infinite Marquee -->
+    <section id="certifications" class="py-24 border-t border-white/5 overflow-hidden bg-dark">
+        <div class="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+            <div>
+                <h2 class="text-2xl font-medium tracking-tight">Professional Certifications</h2>
+                <p class="text-gray-500 mt-2">Continuous learning across multiple platforms.</p>
+            </div>
+            <button onclick="document.getElementById('cert-modal').classList.remove('hidden'); document.getElementById('cert-modal').classList.add('flex'); document.body.style.overflow='hidden';" class="px-5 py-2.5 text-sm border border-white/20 hover:border-accent hover:text-accent transition-colors w-fit flex items-center gap-2">
+                View All <i data-lucide="grid-2x2" class="w-4 h-4"></i>
+            </button>
+        </div>
+        
+        <div class="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+            <div class="flex items-center justify-center md:justify-start [&_li]:mx-4 [&_img]:max-w-none animate-[marquee_40s_linear_infinite]">
+                <ul class="flex items-center justify-center gap-4 px-2">
+                    <!-- Cert 1 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Pemrograman dengan Python.png" alt="Python" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Python Programming</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 2 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_  Dasar AI.png" alt="Dasar AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Basic AI Concepts</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 3 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Dasar Cloud dan Gen AI di AWS.png" alt="AWS Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Cloud & Gen AI at AWS</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 4 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/database design_ORACEL.png" alt="Database Design" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Database Design</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                        </div>
+                    </li>
+                    <!-- Cert 5 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/database programing sql_ORACEL.png" alt="SQL" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Database SQL Programming</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                        </div>
+                    </li>
+                    <!-- Cert 6 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Introduction AI _ IBMSkillsBuild2.png" alt="Intro AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Intro to AI</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 7 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Introduction to Generative AI_ IBMSkillsBuild.png" alt="Intro Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Intro to Generative AI</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 8 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate AI Ethics_ IBMSkillsBuild.png" alt="AI Ethics" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">AI Ethics</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 9 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Use Generative AI for Software Developmen _ IBMSkillsBuild.png" alt="Use GenAI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">GenAI for Software Dev</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 10 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Code Generation and Optimization Using IBM_ IBMSkillsBuild.png" alt="Code Gen Optimization" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Code Gen & Optimization</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 11 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate IBM Granite Models for Software Development _ IBMSkillsBuild.png" alt="IBM Granite" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">IBM Granite Models</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 12 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Career Management Essential _ IBMSkillsBuild.png" alt="Career Mgmt" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Career Management</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                </ul>
+                
+                <!-- Duplicate UL for infinite scroll effect -->
+                <ul class="flex items-center justify-center gap-4 px-2" aria-hidden="true">
+                    <!-- Cert 1 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Pemrograman dengan Python.png" alt="Python" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Python Programming</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 2 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_  Dasar AI.png" alt="Dasar AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Basic AI Concepts</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 3 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Dasar Cloud dan Gen AI di AWS.png" alt="AWS Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Cloud & Gen AI at AWS</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                        </div>
+                    </li>
+                    <!-- Cert 4 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/database design_ORACEL.png" alt="Database Design" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Database Design</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                        </div>
+                    </li>
+                    <!-- Cert 5 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/database programing sql_ORACEL.png" alt="SQL" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Database SQL Programming</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                        </div>
+                    </li>
+                    <!-- Cert 6 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Introduction AI _ IBMSkillsBuild2.png" alt="Intro AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Intro to AI</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 7 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Introduction to Generative AI_ IBMSkillsBuild.png" alt="Intro Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Intro to Generative AI</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 8 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate AI Ethics_ IBMSkillsBuild.png" alt="AI Ethics" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">AI Ethics</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 9 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Use Generative AI for Software Developmen _ IBMSkillsBuild.png" alt="Use GenAI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">GenAI for Software Dev</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 10 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Code Generation and Optimization Using IBM_ IBMSkillsBuild.png" alt="Code Gen Optimization" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Code Gen & Optimization</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 11 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate IBM Granite Models for Software Development _ IBMSkillsBuild.png" alt="IBM Granite" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">IBM Granite Models</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                    <!-- Cert 12 -->
+                    <li class="w-72 border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors shrink-0">
+                        <div class="aspect-[4/3] bg-surface relative">
+                            <img src="src/assets/Certificates/img/Certificate Career Management Essential _ IBMSkillsBuild.png" alt="Career Mgmt" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity">
+                        </div>
+                        <div class="p-4 bg-surface/50 border-t border-white/5">
+                            <p class="text-sm font-medium truncate">Career Management</p>
+                            <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Modal -->
+    <div id="cert-modal" class="fixed inset-0 z-[100] bg-dark/95 backdrop-blur-md hidden flex-col transition-opacity">
+        <div class="p-6 border-b border-white/10 flex justify-between items-center bg-dark/80 sticky top-0 z-10 backdrop-blur-md">
+            <h3 class="text-xl font-medium tracking-tight">All Certifications</h3>
+            <button onclick="document.getElementById('cert-modal').classList.add('hidden'); document.getElementById('cert-modal').classList.remove('flex'); document.body.style.overflow='auto';" class="p-2 hover:bg-white/10 rounded-full transition-colors">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+        </div>
+        <div class="p-6 overflow-y-auto flex-1 custom-scrollbar">
+            <div class="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 pb-20">
+                <!-- Cert 1 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Pemrograman dengan Python.png" alt="Python" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Python Programming</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                    </div>
+                </div>
+                <!-- Cert 2 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/sertifikat_courseDicoding_  Dasar AI.png" alt="Dasar AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Basic AI Concepts</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                    </div>
+                </div>
+                <!-- Cert 3 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/sertifikat_courseDicoding_ Dasar Cloud dan Gen AI di AWS.png" alt="AWS Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Cloud & Gen AI at AWS</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">Dicoding</p>
+                    </div>
+                </div>
+                <!-- Cert 4 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/database design_ORACEL.png" alt="Database Design" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Database Design</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                    </div>
+                </div>
+                <!-- Cert 5 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/database programing sql_ORACEL.png" alt="SQL" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Database SQL Programming</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">Oracle Academy</p>
+                    </div>
+                </div>
+                <!-- Cert 6 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate Introduction AI _ IBMSkillsBuild2.png" alt="Intro AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Intro to AI</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 7 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate Introduction to Generative AI_ IBMSkillsBuild.png" alt="Intro Gen AI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Intro to Generative AI</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 8 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate AI Ethics_ IBMSkillsBuild.png" alt="AI Ethics" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">AI Ethics</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 9 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate Use Generative AI for Software Developmen _ IBMSkillsBuild.png" alt="Use GenAI" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">GenAI for Software Dev</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 10 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate Code Generation and Optimization Using IBM_ IBMSkillsBuild.png" alt="Code Gen Optimization" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Code Gen & Optimization</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 11 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate IBM Granite Models for Software Development _ IBMSkillsBuild.png" alt="IBM Granite" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">IBM Granite Models</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+                <!-- Cert 12 -->
+                <div class="border border-white/10 glass-panel overflow-hidden hover:border-accent transition-colors">
+                    <div class="aspect-[4/3] bg-surface relative">
+                        <img src="src/assets/Certificates/img/Certificate Career Management Essential _ IBMSkillsBuild.png" alt="Career Mgmt" class="absolute inset-0 w-full h-full object-cover opacity-70 hover:opacity-100 transition-opacity cursor-zoom-in" onclick="window.open(this.src)">
+                    </div>
+                    <div class="p-4 bg-surface/50 border-t border-white/5">
+                        <p class="text-sm font-medium truncate">Career Management</p>
+                        <p class="text-xs text-gray-500 font-mono mt-1">IBM SkillsBuild</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 bg-dark">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl tracking-tighter font-medium mb-6">Ready to collaborate.</h2>
+            <p class="text-gray-400 mb-12 max-w-lg mx-auto">
+                Currently open for new opportunities. Whether you have an exciting project or just want to connect, feel free to reach out.
+            </p>
+            <a href="mailto:hello@example.com" class="magnetic-btn inline-flex items-center justify-center bg-white text-black px-8 py-4 text-sm font-medium hover:bg-gray-200 transition-colors">
+                Contact Me
+            </a>
+            
+            <div class="mt-24 flex items-center justify-center gap-8 text-gray-500 text-sm">
+                <a href="https://github.com/yazidzky" target="_blank" class="hover:text-white transition-colors">GitHub</a>
+                <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
+                <a href="#" class="hover:text-white transition-colors">Instagram</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-white/5 text-center text-xs text-gray-600 font-mono">
+        <p>&copy; 2026. Designed with intent and precision.</p>
+    </footer>
+
+    <!-- Scripts for animations -->
+    <script type="module">
+        import { animate, scroll, inView, stagger, spring, hover, press } from "https://cdn.jsdelivr.net/npm/motion@latest/+esm";
+
+        lucide.createIcons();
+
+        document.addEventListener("DOMContentLoaded", () => {
+
+            // ═══════════════════════════════════════════════
+            // CURTAIN EFFECTS (Custom implementation)
+            // ═══════════════════════════════════════════════
+
+            // 1. IRIS REVEAL — Page Load
+            const irisOverlay = document.getElementById('curtain-iris');
+            const irisCircle = document.getElementById('iris-circle');
+            
+            // Start with screen covered
+            irisCircle.style.clipPath = 'circle(0% at 50% 50%)';
+            irisCircle.style.background = '#0a0a0a';
+
+            // Animate iris open using a driver element
+            setTimeout(() => {
+                // Use CSS transition for clip-path since Motion animate can't animate clip-path keyframes with %
+                irisCircle.style.transition = 'clip-path 1.2s cubic-bezier(0.22, 1, 0.36, 1)';
+                irisCircle.style.clipPath = 'circle(150% at 50% 50%)';
+                
+                setTimeout(() => {
+                    irisOverlay.style.display = 'none';
+                    irisOverlay.style.pointerEvents = 'none';
+                }, 1300);
+            }, 200);
+
+
+            // 2. WIPE TRANSITION — Nav Link Clicks
+            const wipeOverlay = document.getElementById('curtain-wipe');
+            const wipePanel = document.getElementById('wipe-panel');
+            const navLinks = document.querySelectorAll('nav a[href^="#"]');
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    const targetEl = document.querySelector(targetId);
+                    if (!targetEl) return;
+
+                    wipeOverlay.style.display = 'block';
+                    wipeOverlay.style.pointerEvents = 'all';
+
+                    // Phase 1: Wipe covers screen (slide in from left)
+                    wipePanel.style.transition = 'none';
+                    wipePanel.style.transform = 'translateX(-110%)';
+                    // Force reflow
+                    wipePanel.offsetHeight;
+                    wipePanel.style.transition = 'transform 0.45s cubic-bezier(0.65, 0, 0.35, 1)';
+                    wipePanel.style.transform = 'translateX(0%)';
+
+                    setTimeout(() => {
+                        // While covered, scroll to target
+                        targetEl.scrollIntoView({ behavior: 'instant' });
+                        
+                        // Phase 2: Wipe exits (continue right)
+                        wipePanel.style.transform = 'translateX(110%)';
+
+                        setTimeout(() => {
+                            wipeOverlay.style.display = 'none';
+                            wipeOverlay.style.pointerEvents = 'none';
+                            wipePanel.style.transition = 'none';
+                            wipePanel.style.transform = 'translateX(-110%)';
+                        }, 500);
+                    }, 500);
+                });
+            });
+
+
+            // 3. BLINDS REVEAL — Project Images on Scroll
+            const blindsContainer = document.getElementById('curtain-blinds');
+            const projectImages = document.querySelectorAll('.project-row [class*="aspect-"]');
+            
+            projectImages.forEach(img => {
+                // Create blinds overlay scoped to each image
+                img.style.position = 'relative';
+                img.style.overflow = 'hidden';
+
+                const slatCount = 6;
+                const slats = [];
+                for (let i = 0; i < slatCount; i++) {
+                    const slat = document.createElement('div');
+                    slat.className = 'blinds-slat';
+                    slat.style.top = `${(i / slatCount) * 100}%`;
+                    slat.style.height = `${(100 / slatCount) + 0.5}%`;
+                    slat.style.transform = 'scaleY(1)';
+                    slat.style.background = '#0a0a0a';
+                    slat.style.position = 'absolute';
+                    slat.style.left = '0';
+                    slat.style.right = '0';
+                    slat.style.zIndex = '5';
+                    slat.style.transformOrigin = 'top';
+                    img.appendChild(slat);
+                    slats.push(slat);
+                }
+
+                // When scrolled into view, open the blinds
+                inView(img, () => {
+                    animate(slats, 
+                        { scaleY: [1, 0] },
+                        { 
+                            delay: stagger(0.08),
+                            duration: 0.5,
+                            easing: [0.22, 1, 0.36, 1]
+                        }
+                    );
+                }, { margin: "-50px" });
+            });
+
+
+            // 4. SECTION DIVIDER WIPE — Accent line sweeps between sections
+            const sectionBorders = document.querySelectorAll('section.border-t');
+            sectionBorders.forEach(section => {
+                // Create a horizontal accent line that sweeps across on scroll
+                const sweepLine = document.createElement('div');
+                sweepLine.style.cssText = `
+                    position: absolute; top: 0; left: 0;
+                    width: 100%; height: 2px;
+                    background: linear-gradient(90deg, transparent, #f97316, transparent);
+                    transform: scaleX(0);
+                    transform-origin: left;
+                    z-index: 10;
+                `;
+                section.style.position = 'relative';
+                section.appendChild(sweepLine);
+
+                inView(section, () => {
+                    animate(sweepLine,
+                        { scaleX: [0, 1, 1, 0] },
+                        { 
+                            duration: 1.5,
+                            easing: [0.22, 1, 0.36, 1],
+                        }
+                    );
+                }, { margin: "-20px" });
+            });
+            
+            
+            // Cursor Glow Effect
+            const cursorGlow = document.getElementById('cursor-glow');
+            document.addEventListener('mousemove', (e) => {
+                animate(cursorGlow, {
+                    x: e.clientX,
+                    y: e.clientY
+                }, { duration: 0.6, easing: "ease-out" });
+            });
+
+            // Magnetic Buttons
+            const magneticBtns = document.querySelectorAll('.magnetic-btn');
+            magneticBtns.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = (e.clientX - rect.left - rect.width / 2) * 0.3;
+                    const y = (e.clientY - rect.top - rect.height / 2) * 0.3;
+                    animate(btn, { x, y }, { duration: 0.3, easing: "ease-out" });
+                });
+                btn.addEventListener('mouseleave', () => {
+                    animate(btn, { x: 0, y: 0 }, { type: "spring", stiffness: 300, damping: 15 });
+                });
+            });
+
+            // Hanging ID Card Animation - Motion Physics
+            const idCardHanger = document.getElementById('id-card-hanger');
+            const idCard = document.getElementById('id-card');
+            
+            if (idCardHanger && idCard) {
+                const isMobile = window.innerWidth < 768;
+                
+                // Base continuous swing and aesthetic tilt
+                const swing = animate(idCardHanger, 
+                    { rotate: [-(isMobile ? 2 : 4), (isMobile ? 4 : 6)] }, 
+                    { 
+                        duration: 3, 
+                        direction: "alternate", 
+                        repeat: Infinity, 
+                        easing: "ease-in-out" 
+                    }
+                );
+                
+                // Aesthetic 3D Float for the card itself
+                const float3D = animate(idCard,
+                    { 
+                        y: [-5, 5],
+                        rotateX: [10, 20],
+                        rotateY: [-15, -5],
+                        rotateZ: [-5, -2]
+                    },
+                    {
+                        duration: 4,
+                        direction: "alternate",
+                        repeat: Infinity,
+                        easing: "ease-in-out"
+                    }
+                );
+                
+                idCardHanger.style.transformOrigin = "top center";
+
+                if (!isMobile) {
+                    let isHovering = false;
+
+                    idCard.addEventListener('mouseenter', () => {
+                        isHovering = true;
+                        swing.pause(); 
+                        float3D.pause();
+                    });
+
+                    idCard.addEventListener('mousemove', (e) => {
+                        const rect = idCard.getBoundingClientRect();
+                        const centerX = rect.left + rect.width / 2;
+                        const centerY = rect.top + rect.height / 2;
+                        const distX = e.clientX - centerX;
+                        const distY = e.clientY - centerY;
+                        
+                        // Apply translations to the hanger
+                        animate(idCardHanger, {
+                            x: distX * 0.2,
+                            y: distY * 0.2,
+                            rotate: distX * 0.05
+                        }, { duration: 0.5, easing: "ease-out" });
+
+                        // Apply 3D tilt to the inner card ONLY
+                        animate(idCard, {
+                            rotateX: -distY * 0.15,
+                            rotateY: distX * 0.15
+                        }, { duration: 0.3, easing: "ease-out" });
+                    });
+
+                    idCard.addEventListener('mouseleave', () => {
+                        isHovering = false;
+                        
+                        animate(idCard, { rotateX: 0, rotateY: 0 }, { duration: 0.5, easing: "ease-out" });
+                        
+                        const returnAnim = animate(idCardHanger, { x: 0, y: 0, rotate: 0 }, { 
+                            type: "spring", stiffness: 300, damping: 20 
+                        });
+                        
+                        returnAnim.finished.then(() => {
+                            if (!isHovering) {
+                                swing.play();
+                                float3D.play();
+                            }
+                        });
+                    });
+
+                    // Pull effect
+                    let isDragging = false;
+                    idCard.addEventListener('mousedown', () => {
+                        isDragging = true;
+                        animate(idCard, { scale: 0.95 }, { duration: 0.3, easing: "ease-out" });
+                    });
+                    window.addEventListener('mouseup', () => {
+                        if (isDragging) {
+                            isDragging = false;
+                            animate(idCard, { scale: 1 }, { type: "spring", stiffness: 300, damping: 15 });
+                        }
+                    });
+                }
+            }
+
+            // Interactive Project & Skill Buttons
+            const interactiveLinks = document.querySelectorAll('.project-row a, #skills .glass-panel');
+            interactiveLinks.forEach(link => {
+                hover(link, (element) => {
+                    animate(element, { scale: 1.03 }, { type: "spring", stiffness: 400, damping: 25 });
+                    return () => animate(element, { scale: 1 }, { type: "spring", stiffness: 400, damping: 25 });
+                });
+                press(link, (element) => {
+                    animate(element, { scale: 0.95 }, { type: "spring", stiffness: 400, damping: 25 });
+                    return () => animate(element, { scale: 1.03 }, { type: "spring", stiffness: 400, damping: 25 });
+                });
+            });
+
+            // Hero Animation Stagger
+            const heroElements = document.querySelectorAll(".hero-text > *");
+            animate(
+                heroElements,
+                { y: [30, 0], opacity: [0, 1] },
+                { 
+                    delay: stagger(0.1, { startDelay: 0.2 }), 
+                    duration: 0.8, 
+                    easing: "ease-out" 
+                }
+            );
+
+            if (idCardHanger) {
+                animate(
+                    idCardHanger,
+                    { y: [-100, 0], rotate: [-15, 0], opacity: [0, 1] },
+                    { 
+                        delay: 0.6,
+                        type: "spring",
+                        stiffness: 200,
+                        damping: 20
+                    }
+                );
+            }
+
+            // Aesthetic Scroll Reveals for Layout
+            const revealSections = document.querySelectorAll('section');
+            revealSections.forEach(section => {
+                const elementsToReveal = section.querySelectorAll('.project-row, .glass-panel, h2, h3, p.text-gray-400');
+                if (elementsToReveal.length > 0) {
+                    // Set initial state
+                    elementsToReveal.forEach(el => {
+                        el.style.opacity = '0';
+                        el.style.transform = 'translateY(30px)';
+                    });
+                    
+                    inView(section, () => {
+                        animate(
+                            elementsToReveal,
+                            { opacity: 1, y: 0 },
+                            { 
+                                delay: stagger(0.15),
+                                duration: 0.8,
+                                easing: [0.22, 1, 0.36, 1] // Custom spring-like easing
+                            }
+                        );
+                    }, { margin: "-100px" });
+                }
+            });
+
+            // Scroll InView animations
+            inView(".gsap-fade-up", (info) => {
+                animate(info.target, { y: [24, 0], opacity: [0, 1] }, { duration: 0.8, easing: "ease-out" });
+            });
+
+            inView(".project-row", (info) => {
+                animate(info.target, { y: [40, 0], opacity: [0, 1] }, { duration: 0.8, easing: "ease-out" });
+            });
+
+            // Navbar scroll hide/show
+            let lastScroll = 0;
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                if (currentScroll <= 0) {
+                    navbar.style.transform = "translateY(0)";
+                } else if (currentScroll > lastScroll) {
+                    navbar.style.transform = "translateY(-100%)";
+                } else {
+                    navbar.style.transform = "translateY(0)";
+                }
+                lastScroll = currentScroll;
+            }, { passive: true });
+        });
+    </script>
+</body>
+</html>
