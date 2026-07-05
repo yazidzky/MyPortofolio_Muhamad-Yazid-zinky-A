@@ -2309,7 +2309,20 @@
                 if (!btn) return;
                 catTabsEl.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
                 btn.classList.add('active');
-                buildSkillCards(btn.dataset.cat);
+                const selectedCat = btn.dataset.cat;
+                buildSkillCards(selectedCat);
+                // On mobile, jump skill stack to the selected category card
+                if (window.innerWidth < 768) {
+                    setTimeout(() => {
+                        const SKILL_CATS = Object.keys(TECH);
+                        if (selectedCat === 'all') {
+                            initMobileSkillStack(0);
+                        } else {
+                            const idx = SKILL_CATS.indexOf(selectedCat);
+                            initMobileSkillStack(idx >= 0 ? idx : 0);
+                        }
+                    }, 80);
+                }
             });
         }
 
@@ -2700,7 +2713,7 @@
         // ══════════════════════════════════════════
         // MOBILE STACKED SKILLS CAROUSEL
         // ══════════════════════════════════════════
-        function initMobileSkillStack() {
+        function initMobileSkillStack(startIndex) {
             const isMobile = window.innerWidth < 768;
             if (!isMobile) return;
 
@@ -2713,14 +2726,12 @@
             const skContainer = document.getElementById('skill-stack-container');
             const skDots      = document.getElementById('skill-stack-dots');
             const skCounter   = document.getElementById('skill-stack-counter');
-            const skPrev      = document.getElementById('skill-stack-prev');
-            const skNext      = document.getElementById('skill-stack-next');
             if (!skContainer) return;
 
             // Build skill data directly (same as TECH object)
             const SKILL_CATS = Object.keys(TECH);
             const total = SKILL_CATS.length;
-            let current = 0;
+            let current = (startIndex !== undefined && startIndex >= 0 && startIndex < total) ? startIndex : 0;
 
             // Build dots
             skDots.innerHTML = '';
@@ -2829,19 +2840,22 @@
             }
 
             // Remove old listeners to avoid duplicates
-            const newPrev = skPrev.cloneNode(true);
-            const newNext = skNext.cloneNode(true);
-            skPrev.parentNode.replaceChild(newPrev, skPrev);
-            skNext.parentNode.replaceChild(newNext, skNext);
+            const newPrev = document.getElementById('skill-stack-prev').cloneNode(true);
+            const newNext = document.getElementById('skill-stack-next').cloneNode(true);
+            document.getElementById('skill-stack-prev').parentNode.replaceChild(newPrev, document.getElementById('skill-stack-prev'));
+            document.getElementById('skill-stack-next').parentNode.replaceChild(newNext, document.getElementById('skill-stack-next'));
             newPrev.addEventListener('click', () => skGoTo(current - 1, 'right'));
             newNext.addEventListener('click', () => skGoTo(current + 1, 'left'));
 
-            // Touch swipe
+            // Touch swipe — use AbortController to avoid stacking on re-init
+            if (skContainer._touchAbort) skContainer._touchAbort.abort();
+            const touchCtrl = new AbortController();
+            skContainer._touchAbort = touchCtrl;
             let tx = 0, ty = 0;
             skContainer.addEventListener('touchstart', e => {
                 tx = e.touches[0].clientX;
                 ty = e.touches[0].clientY;
-            }, { passive: true });
+            }, { passive: true, signal: touchCtrl.signal });
             skContainer.addEventListener('touchend', e => {
                 const dx = e.changedTouches[0].clientX - tx;
                 const dy = e.changedTouches[0].clientY - ty;
@@ -2849,7 +2863,7 @@
                     if (dx < 0) skGoTo(current + 1, 'left');
                     else skGoTo(current - 1, 'right');
                 }
-            }, { passive: true });
+            }, { passive: true, signal: touchCtrl.signal });
 
             // Initial render — wait one frame for layout
             requestAnimationFrame(() => updateSkillStack());
@@ -2880,16 +2894,11 @@
         // We patch the init to run skill stack after build
         const origBuildBtn = document.getElementById('cat-tabs');
         if (origBuildBtn) {
-            // Re-init skill stack whenever category changes
-            origBuildBtn.addEventListener('click', () => {
-                setTimeout(() => {
-                    if (window.innerWidth < 768) initMobileSkillStack();
-                }, 100);
-            });
+            // Re-init skill stack whenever category changes — handled above in cat-tab click listener
         }
         // Initial skill stack
         setTimeout(() => {
-            if (window.innerWidth < 768) initMobileSkillStack();
+            if (window.innerWidth < 768) initMobileSkillStack(0);
         }, 300);
     });
     </script>
