@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV – Muhamad Yazid Zinky Arisona | Teacher Coding & Robotics – CODERO</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --accent: #16a34a;
+            --accent2: #15803d;
+            --dark:   #0a0a0a;
+            --text:   #1a1a1a;
+            --muted:  #555;
+            --border: #e0e0e0;
+            --bg:     #ffffff;
+            --light-bg: #f0fdf4;
+        }
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.55;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 44px 48px 60px;
+        }
+        @media print {
+            body { padding: 18px 30px 36px; font-size: 10pt; }
+            .no-print { display: none !important; }
+            a { color: inherit !important; text-decoration: none !important; }
+            section { page-break-inside: avoid; }
+        }
+        .no-print {
+            position: fixed; bottom: 24px; right: 24px;
+            display: flex; gap: 10px; z-index: 999;
+        }
+        .no-print button {
+            padding: 10px 20px; background: var(--accent); color: #fff;
+            border: none; border-radius: 6px; font-size: 13px;
+            font-weight: 700; cursor: pointer;
+        }
+        .no-print button:hover { background: var(--accent2); }
+        .no-print button.secondary {
+            background: transparent; border: 1.5px solid #ccc; color: #444;
+        }
+        .no-print button.secondary:hover { border-color: #999; }
+        /* ── Header ── */
+        header {
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 18px; margin-bottom: 24px;
+        }
+        header h1 {
+            font-size: 24pt; font-weight: 700;
+            letter-spacing: -0.02em; color: var(--dark); margin-bottom: 3px;
+        }
+        .subtitle {
+            font-size: 11pt; color: var(--accent);
+            font-weight: 700; letter-spacing: 0.04em;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .contact-row {
+            display: flex; flex-wrap: wrap;
+            gap: 4px 18px; font-size: 9.5pt; color: var(--muted); margin-top: 8px;
+        }
+        .contact-row a { color: var(--muted); text-decoration: none; }
+        .contact-row a:hover { color: var(--accent); }
+        /* ── Sections ── */
+        section { margin-bottom: 22px; }
+        section h2 {
+            font-size: 9.5pt; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            border-bottom: 1.5px solid var(--border);
+            padding-bottom: 4px; margin-bottom: 12px;
+        }
+        .about-text { font-size: 10.5pt; color: #333; line-height: 1.65; }
+        /* ── Entries ── */
+        .entry { margin-bottom: 16px; }
+        .entry-header {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 10px; flex-wrap: wrap;
+        }
+        .entry-title { font-size: 11pt; font-weight: 700; color: var(--dark); }
+        .entry-org { font-size: 10.5pt; font-weight: 600; color: var(--accent); }
+        .entry-date { font-size: 9.5pt; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+        .entry-location { font-size: 9.5pt; color: var(--muted); margin-bottom: 5px; }
+        .entry ul { padding-left: 17px; margin-top: 5px; }
+        .entry ul li { font-size: 10.5pt; color: #333; margin-bottom: 3px; line-height: 1.55; }
+        /* ── Skills Grid ── */
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 32px; }
+        .skill-group-label {
+            font-size: 9.5pt; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.1em; color: var(--dark); margin-bottom: 3px;
+        }
+        .skill-list { font-size: 10pt; color: #444; line-height: 1.6; }
+        /* ── Level Badge ── */
+        .lvl { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 8.5pt;
+               font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+        .lvl-intermediate { background: #dbeafe; color: #1e40af; }
+        .lvl-advanced     { background: #dcfce7; color: #166534; }
+        .lvl-beginner     { background: #fef9c3; color: #854d0e; }
+        /* ── Highlight box ── */
+        .highlight-box {
+            background: var(--light-bg);
+            border: 1px solid #bbf7d0;
+            border-left: 4px solid var(--accent);
+            border-radius: 6px;
+            padding: 12px 16px;
+            margin-bottom: 14px;
+            font-size: 10.5pt;
+            color: #166534;
+            line-height: 1.6;
+        }
+        /* ── Skills Table ── */
+        .skills-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+        .skills-table tr:nth-child(even) td { background: var(--light-bg); }
+        .skills-table td { padding: 6px 10px; font-size: 10pt; vertical-align: top; border: 1px solid var(--border); }
+        .skills-table td:first-child {
+            font-weight: 700; width: 28%; color: var(--dark);
+            font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap;
+        }
+        .skills-table td:nth-child(2) { width: 20%; color: var(--muted); font-size: 9pt; }
+        .skills-table td:last-child { color: #444; }
+        /* ── Cert list ── */
+        .cert-list { columns: 2; gap: 24px; }
+        .cert-item { font-size: 10pt; color: #333; margin-bottom: 4px; break-inside: avoid; }
+        .cert-item span { font-size: 9pt; color: var(--muted); }
+        /* ── Project entry ── */
+        .project-entry { margin-bottom: 14px; }
+        .project-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 5px; }
+        .project-title { font-size: 11pt; font-weight: 700; color: var(--dark); }
+        .project-tag { font-size: 9pt; color: var(--accent); font-weight: 600; }
+        .project-links { font-size: 9pt; color: var(--muted); margin-top: 1px; }
+        .project-links a { color: var(--muted); text-decoration: none; }
+        .project-desc ul { padding-left: 16px; margin-top: 4px; }
+        .project-desc ul li { font-size: 10pt; color: #444; margin-bottom: 3px; line-height: 1.55; }
+        .tech-tags { margin-top: 3px; font-size: 9pt; color: var(--muted); font-family: 'Courier New', monospace; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Muhamad Yazid Zinky Arisona</h1>
+    <div class="subtitle">Teacher Coding &amp; Robotics &nbsp;·&nbsp; Informatika &amp; AI Enthusiast &nbsp;·&nbsp; CODERO</div>
+    <div class="contact-row">
+        <span>📧 <a href="mailto:yazidzinky98@gmail.com">yazidzinky98@gmail.com</a></span>
+        <span>🔗 <a href="https://github.com/yazidzky" target="_blank">github.com/yazidzky</a></span>
+        <span>💼 <a href="https://www.linkedin.com/in/muhamadyazidzinkyarisona" target="_blank">linkedin.com/in/muhamadyazidzinkyarisona</a></span>
+        <span>🌐 <a href="https://portfolio-yazidzky.vercel.app" target="_blank">portfolio-yazidzky.vercel.app</a></span>
+        <span>📍 Bandung, Jawa Barat, Indonesia</span>
+        <span>🎓 S1 Teknik Informatika — Semester 6</span>
+        <span>📊 IPK: (≥ 3.0)</span>
+    </div>
+</header>
+
+<section>
+    <h2>Professional Summary</h2>
+    <div class="highlight-box">
+        💡 Saya percaya bahwa belajar coding dan robotika harusnya menyenangkan — bukan menakutkan. Saya hadir untuk menjadi jembatan antara teknologi dan cara berpikir anak-anak.
+    </div>
+    <p class="about-text">
+        Mahasiswa S1 Teknik Informatika UIN Sunan Gunung Djati Bandung, aktif di Coding Camp 2026 powered by DBS Foundation, dengan pengalaman nyata di bidang pemrograman, robotika, dan pengembangan sistem berbasis AI. Memiliki pengalaman memimpin tim teknis (Mechanical Division Leader di Robotika UIN Bandung), berbicara di depan umum, dan bekerja dalam tekanan. Antusias terhadap dunia pendidikan anak, percaya bahwa setiap anak bisa berpikir secara komputasional — tugas saya adalah membuat prosesnya fun, interaktif, dan bermakna. Siap mengajar kelas reguler, trial class, membuat progress report, dan mendampingi project siswa dengan energi, disiplin, dan kreativitas.
+    </p>
+</section>
+
+
+<section>
+    <h2>Technical Skills — Coding &amp; Robotics Teaching</h2>
+    <table class="skills-table">
+        <tr>
+            <td>Programming Basics</td>
+            <td><span class="lvl lvl-advanced">Advanced</span></td>
+            <td>Python, JavaScript, HTML5, CSS3 — mampu menyederhanakan konsep untuk anak-anak &amp; remaja</td>
+        </tr>
+        <tr>
+            <td>Robotics &amp; Embedded</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>Mikrokontroler (Arduino-compatible C/C++), sensor integration, motor control, FSM logic — pengalaman langsung di tim robotika</td>
+        </tr>
+        <tr>
+            <td>Algoritma &amp; Logika</td>
+            <td><span class="lvl lvl-advanced">Advanced</span></td>
+            <td>Computational thinking, algoritma dasar, struktur data, problem-solving — fondasi utama kurikulum coding anak</td>
+        </tr>
+        <tr>
+            <td>Tools Pembelajaran</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>Scratch (block-based coding), visual programming concepts, GitHub untuk proyek kolaboratif siswa</td>
+        </tr>
+        <tr>
+            <td>AI / Machine Learning</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>TensorFlow, Scikit-learn, Computer Vision (OpenCV, MediaPipe) — bisa mengenalkan AI dasar secara visual &amp; interaktif</td>
+        </tr>
+        <tr>
+            <td>Classroom Management</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>Pengalaman memimpin tim (10 bulan), mentoring anggota junior, menyampaikan materi teknis secara terstruktur</td>
+        </tr>
+        <tr>
+            <td>Teaching &amp; Komunikasi</td>
+            <td><span class="lvl lvl-advanced">Advanced</span></td>
+            <td>Public speaking (AFL Delegate, presentasi kompetisi), komunikasi interpersonal, adaptif terhadap berbagai audiens</td>
+        </tr>
+        <tr>
+            <td>Desain &amp; Prototyping</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>3D modeling &amp; prototyping (hardware-software integration), mendukung project-based learning untuk siswa</td>
+        </tr>
+        <tr>
+            <td>Dokumentasi &amp; Reporting</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>Progress tracking, dokumentasi proyek tim, laporan berkala — relevan untuk progress report siswa</td>
+        </tr>
+    </table>
+</section>
+
+
+<section>
+    <h2>Experience &amp; Organisasi</h2>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Leader of Mechanical Robotics Division</div>
+                <div class="entry-org">Robotika UIN Bandung</div>
+            </div>
+            <div class="entry-date">Maret 2025 – Desember 2025 (10 bulan)</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Divisi mekanikal memiliki anggota baru dengan skill beragam — beberapa belum pernah menyentuh robotika sama sekali.</li>
+            <li><strong>Task:</strong> Memimpin divisi sekaligus memastikan transfer ilmu berjalan efektif ke seluruh anggota tim.</li>
+            <li><strong>Action:</strong> Merancang sesi mentoring mingguan terstruktur, menyederhanakan konsep teknis (desain mekanik, integrasi sensor) menjadi langkah yang mudah dipahami anggota junior; membangun lingkungan tim yang suportif dan terbuka.</li>
+            <li><strong>Result:</strong> Seluruh anggota junior mampu berkontribusi aktif pada iterasi proyek berikutnya; berhasil menyerahkan semua subsistem mekanis tepat waktu selama 3 siklus proyek — membuktikan kemampuan mentoring, kepemimpinan, dan komunikasi teknis yang efektif.</li>
+        </ul>
+    </div>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Member of Robotics Team — Sumo Robot Project</div>
+                <div class="entry-org">Robotika UIN Bandung</div>
+            </div>
+            <div class="entry-date">Oktober 2024 – Desember 2024 (3 bulan)</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Tim perlu membangun sumo robot dari nol dalam waktu terbatas, dengan anggota yang memiliki latar belakang berbeda-beda.</li>
+            <li><strong>Task:</strong> Bertanggung jawab pada embedded system programming dan koordinasi dengan tim hardware.</li>
+            <li><strong>Action:</strong> Memprogram firmware C/C++ untuk mikrokontroler, mengintegrasikan sensor dan motor, berkolaborasi harian lintas divisi, serta mendokumentasikan setiap iterasi untuk keperluan belajar bersama tim.</li>
+            <li><strong>Result:</strong> Robot sumo berhasil diselesaikan dan berfungsi sesuai target dalam deadline — membuktikan kemampuan bekerja dalam tekanan, disiplin, dan inisiatif tinggi dalam lingkungan tim.</li>
+        </ul>
+    </div>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Delegate — AFL (Association For Leadership)</div>
+                <div class="entry-org">AFL Winter Peak 2024</div>
+            </div>
+            <div class="entry-date">2024</div>
+        </div>
+        <div class="entry-location">Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Dipilih sebagai delegasi dalam program leadership nasional AFL Winter Peak 2024.</li>
+            <li><strong>Task:</strong> Menyusun dan mempresentasikan proposal STA (Student Training Agenda) di depan peserta dari berbagai universitas.</li>
+            <li><strong>Action:</strong> Merancang proposal secara sistematis, mempresentasikan di depan audiens yang beragam, bernegosiasi dan berkolaborasi dengan delegasi lain untuk memperkuat argumen.</li>
+            <li><strong>Result:</strong> Meraih penghargaan <strong>Best STA Proposal — AFL Winter Peak 2024</strong> — membuktikan kemampuan public speaking, berpikir sistematis, dan komunikasi yang persuasif di depan umum.</li>
+        </ul>
+    </div>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Finalist — Web Design Competition (HIMIKA CUP PART-V)</div>
+                <div class="entry-org">Universitas Dehasen Bengkulu (UNIVED)</div>
+            </div>
+            <div class="entry-date">November 2024</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Kompetisi web design tingkat nasional dengan waktu pengerjaan ketat dan standar teknis tinggi.</li>
+            <li><strong>Task:</strong> Menjadi bagian dari tim yang mengembangkan dan mempresentasikan produk web secara lengkap.</li>
+            <li><strong>Action:</strong> Membangun halaman responsif dengan HTML5, CSS3, Bootstrap, dan JavaScript; mengoptimalkan performa dan mengelola waktu tim secara efektif di bawah tekanan kompetisi.</li>
+            <li><strong>Result:</strong> Lolos ke babak finalis tingkat nasional — menunjukkan kemampuan bekerja dalam tekanan, kreativitas, dan kolaborasi tim yang solid.</li>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h2>Proyek Relevan — Coding, Robotics &amp; Pembelajaran Interaktif</h2>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">Sign Language Recognition — Real-Time Computer Vision</div>
+            <div class="project-tag">Python · Computer Vision · MediaPipe · OpenCV</div>
+        </div>
+        <div class="project-links">
+            <a href="https://github.com/yazidzky/Program-bahasa-Isyarat-berbasis-python" target="_blank">github.com/yazidzky/Program-bahasa-Isyarat-berbasis-python</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Bahasa isyarat masih sulit diakses oleh masyarakat umum, terutama anak-anak yang ingin belajar.</li>
+                <li><strong>T:</strong> Membangun sistem yang bisa menerjemahkan gerakan tangan menjadi teks secara real-time.</li>
+                <li><strong>A:</strong> Menggunakan MediaPipe untuk deteksi 21 landmark tangan per frame via webcam, dikombinasikan dengan logika Finite State Automata untuk pengenalan gestur.</li>
+                <li><strong>R:</strong> Sistem berjalan real-time via kamera — proyek ini ideal sebagai bahan ajar coding + computer vision yang visual dan menarik untuk siswa.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Python · MediaPipe · OpenCV · FSA · Computer Vision</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">PELET App — AI CV Matching (FastAPI + NLP)</div>
+            <div class="project-tag">Python · FastAPI · Machine Learning · NLP</div>
+        </div>
+        <div class="project-links">
+            <a href="https://pelet-app.vercel.app" target="_blank">pelet-app.vercel.app</a> &nbsp;|&nbsp;
+            <a href="https://github.com/Pelet-app/Model_AI" target="_blank">github.com/Pelet-app/Model_AI</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Pencari kerja kesulitan mencocokkan skill CV mereka dengan standar kompetensi nasional (SKKNI).</li>
+                <li><strong>T:</strong> Membangun model AI yang secara semantik mencocokkan CV dengan standar kompetensi secara otomatis.</li>
+                <li><strong>A:</strong> Training model dengan Sentence-BERT + TensorFlow, served via FastAPI REST endpoint, akurasi 99.06% pada 1.175 sampel.</li>
+                <li><strong>R:</strong> Proyek ini bisa dijadikan materi pengenalan AI yang nyata dan relevan untuk siswa tingkat lanjut.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Python · Sentence-BERT · TensorFlow · FastAPI · NLP</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">SipSip Water Tracker — Mobile App (Flutter)</div>
+            <div class="project-tag">Mobile · Flutter · Firebase · UI/UX</div>
+        </div>
+        <div class="project-links">
+            <a href="https://github.com/yazidzky/WaterTracker-Sipsip-" target="_blank">github.com/yazidzky/WaterTracker-Sipsip-</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Anak-anak dan remaja sering lupa minum air — butuh aplikasi yang fun dan gamified.</li>
+                <li><strong>T:</strong> Membangun mobile app cross-platform dengan fitur tracking, gamifikasi, dan notifikasi pintar.</li>
+                <li><strong>A:</strong> Menggunakan Flutter + Firebase + Hive, mengimplementasikan sistem reminder adaptif dan statistik hidrasi visual.</li>
+                <li><strong>R:</strong> App dengan UX yang ramah anak — cocok sebagai contoh nyata project-based learning untuk siswa mobile coding.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Flutter · Dart · Firebase · Hive · Provider</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">Ocean Blue — Real-Time Fullstack PWA</div>
+            <div class="project-tag">Fullstack · React · Socket.IO · Node.js</div>
+        </div>
+        <div class="project-links">
+            <a href="https://blue-ocean-main-lrwe.vercel.app" target="_blank">blue-ocean-main-lrwe.vercel.app</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li>Platform manajemen tugas + social network dengan real-time chat, offline mode, dan push notification — menampilkan konsep fullstack nyata yang bisa diajarkan secara bertahap kepada siswa tingkat lanjut.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">React 19 · TypeScript · Socket.IO · MongoDB · Node.js · PWA</div>
+    </div>
+</section>
+
+
+<section>
+    <h2>Pendidikan</h2>
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">S1 Teknik Informatika</div>
+                <div class="entry-org">UIN Sunan Gunung Djati Bandung</div>
+            </div>
+            <div class="entry-date">September 2023 – Sekarang</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li>Aktif di <strong>Coding Camp 2026 powered by DBS Foundation</strong> — program intensif software engineering &amp; AI</li>
+            <li>Mata kuliah relevan: Algoritma &amp; Pemrograman, Struktur Data, Basis Data, Rekayasa Perangkat Lunak, Jaringan Komputer, Kecerdasan Buatan</li>
+            <li>IPK ≥ 3.0 (memenuhi syarat minimal yang diminta CODERO)</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Soft Skills yang Relevan untuk CODERO</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px 24px;font-size:10.5pt;color:#333;">
+        <div>✅ <strong>Menyukai dunia anak &amp; pendidikan</strong> — antusias berbagi ilmu, pengalaman mentoring di robotika</div>
+        <div>✅ <strong>Aktif &amp; komunikatif</strong> — Delegate AFL, public speaker, kompetisi nasional</div>
+        <div>✅ <strong>Disiplin &amp; bertanggung jawab</strong> — memimpin tim 10 bulan, konsisten deliver target</div>
+        <div>✅ <strong>Inisiatif tinggi</strong> — Best STA Proposal AFL 2024, 13+ proyek mandiri</div>
+        <div>✅ <strong>Mampu bekerja dalam tim</strong> — kolaborasi lintas divisi robotika, tim kompetisi web</div>
+        <div>✅ <strong>Bekerja dalam tekanan</strong> — deadline kompetisi, sprint project tim</div>
+        <div>✅ <strong>Detail-oriented</strong> — progress tracking, dokumentasi proyek teknis</div>
+        <div>✅ <strong>Berpikir sistematis &amp; inovatif</strong> — arsitektur sistem AI, desain solusi lintas platform</div>
+    </div>
+</section>
+
+<section>
+    <h2>Sertifikasi &amp; Pencapaian</h2>
+    <div class="cert-list">
+        <div class="cert-item">🏆 Best STA Proposal <span>— AFL Winter Peak 2024</span></div>
+        <div class="cert-item">🏆 Finalist Web Design Competition <span>— HIMIKA CUP V, UNIVED 2024</span></div>
+        <div class="cert-item">Coding Camp 2026 Cohort <span>— DBS Foundation</span></div>
+        <div class="cert-item">Advanced Deep Learning Projects <span>— Dicoding</span></div>
+        <div class="cert-item">Fundamental Deep Learning <span>— Dicoding</span></div>
+        <div class="cert-item">Machine Learning for Beginners <span>— Dicoding</span></div>
+        <div class="cert-item">Python Programming <span>— Dicoding</span></div>
+        <div class="cert-item">Basic AI Concepts <span>— Dicoding</span></div>
+        <div class="cert-item">Cloud &amp; Gen AI at AWS <span>— Dicoding</span></div>
+        <div class="cert-item">Introduction to AI <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">Introduction to Generative AI <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">AI Ethics <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">GenAI for Software Development <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">Code Generation &amp; Optimization <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">Database Design <span>— Oracle Academy</span></div>
+        <div class="cert-item">Database SQL Programming <span>— Oracle Academy</span></div>
+        <div class="cert-item">NanoConnect: React + Supabase <span>— Codepolitan</span></div>
+        <div class="cert-item">Proficient Dev × Tencent EdgeOne <span>— Codepolitan</span></div>
+    </div>
+</section>
+
+<section>
+    <h2>Bahasa</h2>
+    <div style="font-size:10.5pt;color:#333;">
+        <strong>Indonesia</strong> — Native / Sangat Fasih &nbsp;&nbsp;|&nbsp;&nbsp;
+        <strong>English</strong> — Professional Working Proficiency (dapat mengajar materi coding dalam bahasa Inggris)
+    </div>
+</section>
+
+<div class="no-print">
+    <button class="secondary" onclick="window.history.back()">← Back</button>
+    <button onclick="window.print()">⬇ Save as PDF</button>
+</div>
+
+</body>
+</html>

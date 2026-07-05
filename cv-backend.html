@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV – Muhamad Yazid Zinky Arisona | Back End Developer</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --accent: #1a56db;
+            --dark:   #0a0a0a;
+            --text:   #1a1a1a;
+            --muted:  #555;
+            --border: #e0e0e0;
+            --bg:     #ffffff;
+            --light-bg: #f8faff;
+        }
+        body {
+            font-family: 'Arial', 'Helvetica Neue', sans-serif;
+            font-size: 10.5pt;
+            line-height: 1.55;
+            color: var(--text);
+            background: var(--bg);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 44px 48px 60px;
+        }
+        @media print {
+            body { padding: 18px 30px 36px; font-size: 10pt; }
+            .no-print { display: none !important; }
+            a { color: inherit !important; text-decoration: none !important; }
+            section { page-break-inside: avoid; }
+        }
+        .no-print {
+            position: fixed; bottom: 24px; right: 24px;
+            display: flex; gap: 10px; z-index: 999;
+        }
+        .no-print button {
+            padding: 10px 20px; background: var(--accent); color: #fff;
+            border: none; border-radius: 6px; font-size: 13px;
+            font-weight: 700; cursor: pointer; letter-spacing: 0.02em;
+        }
+        .no-print button:hover { background: #1648c0; }
+        .no-print button.secondary {
+            background: transparent; border: 1.5px solid #ccc; color: #444;
+        }
+        .no-print button.secondary:hover { border-color: #999; }
+        /* ── Header ── */
+        header {
+            border-bottom: 3px solid var(--accent);
+            padding-bottom: 18px; margin-bottom: 24px;
+        }
+        header h1 {
+            font-size: 24pt; font-weight: 700;
+            letter-spacing: -0.02em; color: var(--dark); margin-bottom: 3px;
+        }
+        .subtitle {
+            font-size: 11.5pt; color: var(--accent);
+            font-weight: 700; letter-spacing: 0.04em;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .contact-row {
+            display: flex; flex-wrap: wrap;
+            gap: 4px 18px; font-size: 9.5pt; color: var(--muted); margin-top: 8px;
+        }
+        .contact-row a { color: var(--muted); text-decoration: none; }
+        .contact-row a:hover { color: var(--accent); }
+        /* ── Sections ── */
+        section { margin-bottom: 22px; }
+        section h2 {
+            font-size: 9.5pt; font-weight: 700; letter-spacing: 0.18em;
+            text-transform: uppercase; color: var(--accent);
+            border-bottom: 1.5px solid var(--border);
+            padding-bottom: 4px; margin-bottom: 12px;
+        }
+        .about-text { font-size: 10.5pt; color: #333; line-height: 1.65; }
+        /* ── Entries ── */
+        .entry { margin-bottom: 16px; }
+        .entry-header {
+            display: flex; justify-content: space-between;
+            align-items: flex-start; gap: 10px; flex-wrap: wrap;
+        }
+        .entry-title { font-size: 11pt; font-weight: 700; color: var(--dark); }
+        .entry-org { font-size: 10.5pt; font-weight: 600; color: var(--accent); }
+        .entry-date { font-size: 9.5pt; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+        .entry-location { font-size: 9.5pt; color: var(--muted); margin-bottom: 5px; }
+        .entry ul { padding-left: 17px; margin-top: 5px; }
+        .entry ul li { font-size: 10.5pt; color: #333; margin-bottom: 3px; line-height: 1.55; }
+        /* ── Skills Table ── */
+        .skills-table { width: 100%; border-collapse: collapse; margin-top: 4px; }
+        .skills-table tr:nth-child(even) td { background: var(--light-bg); }
+        .skills-table td { padding: 6px 10px; font-size: 10pt; vertical-align: top; border: 1px solid var(--border); }
+        .skills-table td:first-child {
+            font-weight: 700; width: 28%; color: var(--dark);
+            font-size: 9.5pt; text-transform: uppercase; letter-spacing: 0.06em;
+            white-space: nowrap;
+        }
+        .skills-table td:nth-child(2) { width: 22%; color: var(--muted); font-size: 9pt; font-style: italic; }
+        .skills-table td:last-child { color: #444; }
+        /* ── Level Badge ── */
+        .lvl { display: inline-block; padding: 1px 8px; border-radius: 3px; font-size: 8.5pt;
+               font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
+        .lvl-intermediate { background: #dbeafe; color: #1e40af; }
+        .lvl-advanced     { background: #dcfce7; color: #166534; }
+        .lvl-beginner     { background: #fef9c3; color: #854d0e; }
+        /* ── Projects ── */
+        .project-entry { margin-bottom: 12px; }
+        .project-header { display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 5px; }
+        .project-title { font-size: 11pt; font-weight: 700; color: var(--dark); }
+        .project-tag { font-size: 9pt; color: var(--accent); font-weight: 600; }
+        .project-links { font-size: 9pt; color: var(--muted); margin-top: 1px; }
+        .project-links a { color: var(--muted); text-decoration: none; }
+        .project-desc { font-size: 10pt; color: #444; margin-top: 3px; line-height: 1.55; }
+        .tech-tags { margin-top: 3px; font-size: 9pt; color: var(--muted); font-family: 'Courier New', monospace; }
+        .project-desc ul { padding-left: 16px; margin-top: 3px; }
+        .project-desc ul li { font-size: 10pt; color: #444; margin-bottom: 2px; line-height: 1.5; }
+        /* ── Cert list ── */
+        .cert-list { columns: 2; gap: 24px; }
+        .cert-item { font-size: 10pt; color: #333; margin-bottom: 4px; break-inside: avoid; }
+        .cert-item span { font-size: 9pt; color: var(--muted); }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Muhamad Yazid Zinky Arisona</h1>
+    <div class="subtitle">Back End Developer &nbsp;·&nbsp; RESTful API &nbsp;·&nbsp; Database &amp; ORM Specialist</div>
+    <div class="contact-row">
+        <span>📧 <a href="mailto:yazidzinky98@gmail.com">yazidzinky98@gmail.com</a></span>
+        <span>🔗 <a href="https://github.com/yazidzky" target="_blank">github.com/yazidzky</a></span>
+        <span>💼 <a href="https://www.linkedin.com/in/muhamadyazidzinkyarisona" target="_blank">linkedin.com/in/muhamadyazidzinkyarisona</a></span>
+        <span>🌐 <a href="https://portfolio-yazidzky.vercel.app" target="_blank">portfolio-yazidzky.vercel.app</a></span>
+        <span>📍 Bandung, Jawa Barat, Indonesia</span>
+        <span>✅ Open to Work</span>
+    </div>
+</header>
+
+<section>
+    <h2>Professional Summary</h2>
+    <p class="about-text">
+        Fresh graduate Informatics Engineering student (UIN Sunan Gunung Djati Bandung) with strong <strong>hands-on experience building scalable RESTful APIs</strong>, <strong>relational and non-relational databases</strong>, and full-stack web systems. Proficient in <strong>API design concepts (REST, JWT auth, CRUD)</strong>, <strong>SQL/NoSQL databases (PostgreSQL, MongoDB, Oracle)</strong>, and <strong>ORM technologies</strong>. Active contributor in <strong>Agile team environments</strong> through academic projects and robotics team leadership. Solid foundation in <strong>HTML5, CSS, and JavaScript</strong> as complementary front-end skills. Passionate about building clean, well-structured back-end systems that solve real-world problems.
+    </p>
+</section>
+
+
+<section>
+    <h2>Technical Skills</h2>
+    <table class="skills-table">
+        <tr>
+            <td>Back End Core</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>Node.js</strong>, <strong>Express.js</strong>, <strong>FastAPI (Python)</strong>, <strong>REST API Design</strong>, <strong>JWT Authentication</strong>, Middleware, <strong>MVC Architecture</strong></td>
+        </tr>
+        <tr>
+            <td>Java / Spring Boot</td>
+            <td><span class="lvl lvl-beginner">Familiar</span></td>
+            <td><strong>Java OOP fundamentals</strong>, <strong>Spring Boot concepts (IoC, Dependency Injection, REST Controller)</strong>, currently deepening</td>
+        </tr>
+        <tr>
+            <td>Relational DB &amp; SQL</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>PostgreSQL</strong>, <strong>MySQL</strong>, <strong>Oracle SQL</strong> · <strong>Schema design</strong>, <strong>JOIN</strong>, <strong>indexing</strong>, <strong>stored procedures</strong> · <strong>Oracle Academy certified</strong></td>
+        </tr>
+        <tr>
+            <td>ORM &amp; Database Tools</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>Mongoose (MongoDB ODM)</strong>, Sequelize concepts, Prisma basics — familiar with <strong>JPA/Hibernate patterns</strong></td>
+        </tr>
+        <tr>
+            <td>NoSQL Databases</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>MongoDB (Atlas &amp; local)</strong>, <strong>Firebase Realtime DB &amp; Firestore</strong>, Redis basics</td>
+        </tr>
+        <tr>
+            <td>API &amp; Integration</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>RESTful API (CRUD, versioning, error handling)</strong>, <strong>Socket.IO (real-time)</strong>, API testing with <strong>Postman</strong>/Thunder Client</td>
+        </tr>
+        <tr>
+            <td>Code Versioning</td>
+            <td><span class="lvl lvl-advanced">Advanced</span></td>
+            <td><strong>Git</strong>, <strong>GitHub</strong> · <strong>branching strategies (feature branch, rebase, PR workflow)</strong>, collaborative repo management</td>
+        </tr>
+        <tr>
+            <td>Agile / Methodology</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>Scrum framework</strong>, <strong>sprint planning</strong>, <strong>daily standup</strong>, task board (GitHub Projects), <strong>iterative delivery</strong></td>
+        </tr>
+        <tr>
+            <td>Security &amp; Auth</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>JWT</strong>, <strong>bcrypt password hashing</strong>, <strong>role-based access control (RBAC)</strong>, <strong>AES-256-GCM encryption</strong>, input validation</td>
+        </tr>
+        <tr>
+            <td>Front End (Bonus)</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td><strong>HTML5</strong>, <strong>CSS3</strong>, <strong>JavaScript (ES6+)</strong>, React, Tailwind CSS, <strong>responsive design</strong> — able to build and consume front-end</td>
+        </tr>
+        <tr>
+            <td>DevOps &amp; Deployment</td>
+            <td><span class="lvl lvl-beginner">Familiar</span></td>
+            <td>Vercel, Railway, Render · environment variables, <strong>CI/CD basics</strong>, cloud deployment pipelines</td>
+        </tr>
+        <tr>
+            <td>AI / ML (Bonus)</td>
+            <td><span class="lvl lvl-intermediate">Intermediate</span></td>
+            <td>Python, FastAPI ML serving, Sentence-BERT, TensorFlow, Scikit-learn — <strong>able to integrate AI/ML models into back-end architecture</strong></td>
+        </tr>
+    </table>
+</section>
+
+
+<section>
+    <h2>Experience</h2>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Leader of Mechanical Robotics Division</div>
+                <div class="entry-org">Robotika UIN Bandung</div>
+            </div>
+            <div class="entry-date">Maret 2025 – Desember 2025 (10 bulan)</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Mechanical division lacked structured coordination between design, manufacturing, and integration sub-teams, causing repeated rework cycles.</li>
+            <li><strong>Task:</strong> Took over leadership as Division Head with responsibility for guiding team members and aligning mechanical output with electronics and programming teams.</li>
+            <li><strong>Action:</strong> Introduced <strong>sprint-based task cycles inspired by Agile methodology</strong> — held weekly review sessions, defined clear deliverables per milestone, and created shared documentation for each component design.</li>
+            <li><strong>Result:</strong> <strong>Reduced integration mismatches by ~60%</strong>, improved team velocity, and successfully <strong>delivered all mechanical subsystems on schedule</strong> across 3 project iterations.</li>
+        </ul>
+    </div>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Member of Robotics Team</div>
+                <div class="entry-org">Robotika UIN Bandung</div>
+            </div>
+            <div class="entry-date">Oktober 2024 – Desember 2024 (3 bulan)</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> Team needed to develop a competitive sumo robot from scratch with tight timeline.</li>
+            <li><strong>Task:</strong> Contributed as a core member responsible for embedded system programming and system integration.</li>
+            <li><strong>Action:</strong> Developed firmware in <strong>C/C++ for microcontroller</strong> (sensor reading, motor control, FSM logic), collaborated daily with hardware team through <strong>structured git-based version control</strong>.</li>
+            <li><strong>Result:</strong> Delivered functional sumo robot within deadline; gained strong understanding of <strong>system-level programming</strong>, <strong>version control discipline</strong>, and <strong>team coordination under pressure</strong>.</li>
+        </ul>
+    </div>
+
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">Finalist – Web Design Competition (HIMIKA CUP PART-V)</div>
+                <div class="entry-org">Universitas Dehasen Bengkulu (UNIVED)</div>
+            </div>
+            <div class="entry-date">November 2024</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li><strong>Situation:</strong> National-level web design competition with strict time constraints and full-stack deliverable requirements.</li>
+            <li><strong>Task:</strong> Responsible for front-end implementation and JavaScript interactivity within a cross-functional team.</li>
+            <li><strong>Action:</strong> Built <strong>responsive pages</strong> using <strong>HTML5, CSS3, Bootstrap</strong>, and <strong>vanilla JavaScript</strong>; optimized asset loading and integrated dynamic UI components under competitive time pressure.</li>
+            <li><strong>Result:</strong> Reached <strong>national finalist stage</strong> — demonstrated ability to deliver complete, <strong>production-ready web interface</strong> under deadlines and high-pressure conditions.</li>
+        </ul>
+    </div>
+</section>
+
+
+<section>
+    <h2>Selected Projects (Back End &amp; API Focus)</h2>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">Edurate Platform — Higher Education Review &amp; Rating System</div>
+            <div class="project-tag">Back End · REST API · Node.js · MongoDB</div>
+        </div>
+        <div class="project-links">
+            <a href="https://edu-rate-main-16in.vercel.app" target="_blank">edu-rate-main-16in.vercel.app</a> &nbsp;|&nbsp;
+            <a href="https://github.com/yazidzky/EduRate-main" target="_blank">github.com/yazidzky/EduRate-main</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Campus needed a transparent system for students to review lecturers and courses — no existing solution.</li>
+                <li><strong>T:</strong> Designed and built the full back-end API with multi-role authentication and CRUD review system.</li>
+                <li><strong>A:</strong> Built <strong>RESTful API with Node.js + Express.js</strong>, implemented <strong>JWT-based RBAC (student/lecturer/admin roles)</strong>, designed <strong>MongoDB schema with Mongoose ODM</strong>, created <strong>analytics aggregation endpoints</strong>.</li>
+                <li><strong>R:</strong> Delivered fully functional platform with <strong>3 role types</strong>, <strong>10+ API endpoints</strong>, deployed on Vercel — demonstrates direct alignment with <strong>API design</strong>, <strong>NoSQL implementation</strong>, and <strong>ORM/ODM experience</strong>.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Node.js · Express.js · MongoDB · Mongoose · JWT · REST API · Vercel</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">Ocean Blue — Real-Time Fullstack PWA</div>
+            <div class="project-tag">Back End · Socket.IO · MongoDB · TypeScript</div>
+        </div>
+        <div class="project-links">
+            <a href="https://blue-ocean-main-lrwe.vercel.app" target="_blank">blue-ocean-main-lrwe.vercel.app</a> &nbsp;|&nbsp;
+            <a href="https://github.com/yazidzky/BlueOcean-main" target="_blank">github.com/yazidzky/BlueOcean-main</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Required a back-end that supports real-time messaging, offline capability, and push notifications simultaneously.</li>
+                <li><strong>T:</strong> Built the Node.js back end with Socket.IO integration and MongoDB persistence layer.</li>
+                <li><strong>A:</strong> Designed <strong>event-driven architecture with Socket.IO rooms</strong>, implemented <strong>background sync via Service Worker</strong>, structured <strong>MongoDB collections</strong> for messages, tasks, and user state.</li>
+                <li><strong>R:</strong> Delivered real-time chat + task management PWA with <strong>sub-100ms message latency</strong> and full offline mode — showcasing <strong>advanced NoSQL design</strong> and <strong>event-driven back-end patterns</strong>.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Node.js · Express.js · TypeScript · Socket.IO · MongoDB · React 19 · PWA</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">PELET App — AI CV-to-Competency Matching API</div>
+            <div class="project-tag">Back End · FastAPI · Python · NLP</div>
+        </div>
+        <div class="project-links">
+            <a href="https://pelet-app.vercel.app" target="_blank">pelet-app.vercel.app</a> &nbsp;|&nbsp;
+            <a href="https://github.com/Pelet-app/Model_AI" target="_blank">github.com/Pelet-app/Model_AI</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Job seekers struggled to match their CV skills to Indonesian National Work Standards (SKKNI).</li>
+                <li><strong>T:</strong> Build a robust back-end API to serve an AI semantic matching model at scale.</li>
+                <li><strong>A:</strong> Developed <strong>FastAPI back end</strong> to serve <strong>Sentence-BERT + TensorFlow model</strong>, designed <strong>clean REST endpoints</strong> for CV ingestion and competency scoring, implemented <strong>input validation and error handling</strong>.</li>
+                <li><strong>R:</strong> API serving a model with <strong>99.06% accuracy on 1,175 test samples</strong> — demonstrates ability to <strong>integrate AI/ML into production back-end architecture</strong>.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Python · FastAPI · Sentence-BERT · TensorFlow · REST API · NLP</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">Stuker App — Campus Marketplace with Escrow &amp; AI</div>
+            <div class="project-tag">Back End · Next.js API Routes · MongoDB · AI Integration</div>
+        </div>
+        <div class="project-links">
+            <a href="https://stuker-app-4sh4.vercel.app" target="_blank">stuker-app-4sh4.vercel.app</a> &nbsp;|&nbsp;
+            <a href="https://github.com/yazidzky/stukerApp" target="_blank">github.com/yazidzky/stukerApp</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Campus lacked a platform connecting student service providers with buyers, with no payment safety mechanism.</li>
+                <li><strong>T:</strong> Design and implement a back-end with escrow payment logic, order tracking, and AI chat integration.</li>
+                <li><strong>A:</strong> Built <strong>API routes in Next.js + Node.js</strong>, designed <strong>MongoDB schema for orders/escrow states</strong>, integrated <strong>Gemini AI</strong>, implemented <strong>real-time order tracking with Socket.IO</strong>.</li>
+                <li><strong>R:</strong> Delivered a full marketplace back end with <strong>escrow flow</strong>, <strong>reputation system</strong>, and <strong>AI-powered features</strong> — demonstrating <strong>complex business logic implementation</strong>.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">Next.js · Node.js · MongoDB · Socket.IO · Gemini AI · REST API</div>
+    </div>
+
+    <div class="project-entry">
+        <div class="project-header">
+            <div class="project-title">TeleCode Medical — Secure Back-End for Medical Data</div>
+            <div class="project-tag">Back End · Security · AES-256-GCM · PWA</div>
+        </div>
+        <div class="project-links">
+            <a href="https://tele-code-medical.vercel.app" target="_blank">tele-code-medical.vercel.app</a>
+        </div>
+        <div class="project-desc">
+            <ul>
+                <li><strong>S:</strong> Medical data transmission over consumer networks required strong encryption and steganography without server dependency.</li>
+                <li><strong>T:</strong> Implement secure data layer with encryption, steganography, and rule-based clinical AI entirely on client side.</li>
+                <li><strong>A:</strong> Implemented <strong>AES-256-GCM encryption</strong>, <strong>LSB steganography</strong> in JavaScript, <strong>G.711 audio codec</strong>, and <strong>rule-based AI covering 8 disease classifications</strong>.</li>
+                <li><strong>R:</strong> 100% client-side secure medical PWA — demonstrates <strong>deep understanding of data security</strong>, <strong>encryption algorithms</strong>, and <strong>system design principles critical for back-end security</strong>.</li>
+            </ul>
+        </div>
+        <div class="tech-tags">React 19 · Vite · AES-256-GCM · LSB Steganography · PWA · JavaScript</div>
+    </div>
+</section>
+
+
+<section>
+    <h2>Education</h2>
+    <div class="entry">
+        <div class="entry-header">
+            <div>
+                <div class="entry-title">S1 Teknik Informatika (Informatics Engineering)</div>
+                <div class="entry-org">UIN Sunan Gunung Djati Bandung</div>
+            </div>
+            <div class="entry-date">September 2023 – Sekarang</div>
+        </div>
+        <div class="entry-location">Bandung, Jawa Barat, Indonesia</div>
+        <ul>
+            <li>Coding Camp 2026 Cohort powered by DBS Foundation — <strong>intensive program focusing on software engineering &amp; AI</strong></li>
+            <li>Relevant coursework: <strong>Algorithms &amp; Data Structures</strong>, <strong>Database Systems</strong>, <strong>Object-Oriented Programming</strong>, Software Engineering, Computer Networks</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Organisasi &amp; Achievements</h2>
+    <div class="entry">
+        <ul>
+            <li><strong>Best STA Proposal — AFL Winter Peak 2024</strong> &nbsp;·&nbsp; Delegate of AFL (Association For Leadership)</li>
+            <li><strong>Finalist</strong> — Web Design Competition HIMIKA CUP PART-V, Universitas Dehasen Bengkulu (Nov 2024)</li>
+            <li><strong>Leader of Mechanical Robotics Division</strong> — Robotika UIN Bandung (Mar–Des 2025)</li>
+            <li><strong>Coding Camp 2026 Cohort</strong> powered by DBS Foundation</li>
+        </ul>
+    </div>
+</section>
+
+<section>
+    <h2>Certifications</h2>
+    <div class="cert-list">
+        <div class="cert-item">Database Design <span>— Oracle Academy</span></div>
+        <div class="cert-item">Database SQL Programming <span>— Oracle Academy</span></div>
+        <div class="cert-item">NanoConnect: React + Supabase + Serverless <span>— Codepolitan</span></div>
+        <div class="cert-item">Website Deployment Revolution <span>— Codepolitan</span></div>
+        <div class="cert-item">Proficient Dev Program × Tencent EdgeOne <span>— Codepolitan</span></div>
+        <div class="cert-item">Cloud &amp; Gen AI at AWS <span>— Dicoding</span></div>
+        <div class="cert-item">Python Programming <span>— Dicoding</span></div>
+        <div class="cert-item">Machine Learning for Beginners <span>— Dicoding</span></div>
+        <div class="cert-item">Fundamental Deep Learning <span>— Dicoding</span></div>
+        <div class="cert-item">Advanced Deep Learning Projects <span>— Dicoding</span></div>
+        <div class="cert-item">Basic AI Concepts <span>— Dicoding</span></div>
+        <div class="cert-item">Introduction to AI <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">Introduction to Generative AI <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">AI Ethics <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">GenAI for Software Development <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">Code Generation &amp; Optimization (IBM Granite) <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">IBM Granite Models for Software Dev <span>— IBM SkillsBuild</span></div>
+        <div class="cert-item">IBM Design 2025 — Code Gen &amp; Optimization <span>— IBM</span></div>
+        <div class="cert-item">Career Management Essentials <span>— IBM SkillsBuild</span></div>
+    </div>
+</section>
+
+<section>
+    <h2>Soft Skills</h2>
+    <div style="font-size:10.5pt;color:#333;line-height:1.7;">
+        <strong>Analytical Thinking</strong> &nbsp;·&nbsp; <strong>Problem-Solving</strong> &nbsp;·&nbsp; <strong>Team Collaboration &amp; Individual Work</strong> &nbsp;·&nbsp;
+        Public Speaking &nbsp;·&nbsp; <strong>Detail-Oriented</strong> &nbsp;·&nbsp; <strong>Systematic Thinking</strong> &nbsp;·&nbsp;
+        <strong>Fast Learner</strong> &nbsp;·&nbsp; <strong>Work Under Pressure</strong> &nbsp;·&nbsp; Negotiation &amp; Communication &nbsp;·&nbsp; Creative &amp; Innovative Thinking
+    </div>
+</section>
+
+<section>
+    <h2>Bahasa</h2>
+    <div style="font-size:10.5pt;color:#333;">
+        <strong>Indonesia</strong> — Native &nbsp;&nbsp;|&nbsp;&nbsp; <strong>English</strong> — Professional Working Proficiency
+    </div>
+</section>
+
+<div class="no-print">
+    <button class="secondary" onclick="window.history.back()">← Back</button>
+    <button onclick="window.print()">⬇ Save as PDF</button>
+</div>
+
+</body>
+</html>
